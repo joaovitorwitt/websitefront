@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import jsonp from "jsonp";
+import Image from "next/image";
 
 interface NewsletterData {
   email: string;
@@ -86,9 +87,11 @@ export default function NewsletterForm() {
       />
 
       <div style={{ display: "none" }}>
-        <img
+        <Image
           src="https://forms.aweber.com/form/displays.htm?id=7OxM7MzsrEwc"
           alt=""
+          width={0}
+          height={0}
         />
       </div>
     </form>

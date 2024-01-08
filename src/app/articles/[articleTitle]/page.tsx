@@ -3,6 +3,7 @@ import Header from "@/app/components/Header";
 import LoadingComponent from "@/app/components/LoadingComponent";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Article {
   id: number;
@@ -43,7 +44,7 @@ export default function Article({
     };
 
     fetchArticles();
-  }, [params.articleTitle]);
+  }, []);
 
   function getCorrectTitle(list: any) {
     const correct = list.find(
@@ -135,7 +136,12 @@ export default function Article({
                 <span>{formatArticleDate(article?.publish_date)}</span>
               </div>
 
-              <img src={article?.thumbnail} alt="article" />
+              <Image
+                src={article?.thumbnail ?? "/default.jpg"}
+                width={1920}
+                height={1080}
+                alt="article"
+              />
             </div>
             /
             <div className="container">

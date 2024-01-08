@@ -37,8 +37,8 @@ export default function About() {
               <h3>João Vitor Witt (pronounced: John)</h3>
 
               <p className="about-me-description">
-                I'm enthusiastic about the captivating realms of Web3 and AI.
-                While exploring deeper into the Computer Science realm.{" "}
+                I&apos;m enthusiastic about the captivating realms of Web3 and
+                AI. While exploring deeper into the Computer Science realm.{" "}
                 <Link href={"/articles"} className="article-redirection">
                   Check out my articles
                 </Link>

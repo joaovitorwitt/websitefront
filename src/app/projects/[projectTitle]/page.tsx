@@ -2,6 +2,7 @@
 import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Project {
   project_id: number;
@@ -23,10 +24,10 @@ export default function Project({
       try {
         const response = await fetch(
           // PRODUCTION API
-          // "https://portfolio-backend-fdxe.onrender.com/api/v1/get/projects/"
+          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/projects/"
 
           // DEVELOPMENT API
-          "http://127.0.0.1:8000/api/v1/get/projects/"
+          // "http://127.0.0.1:8000/api/v1/get/projects/"
         );
         const result = await response.json();
         const correctTitleProject = getCorrectTitle(result.projects);
@@ -38,7 +39,7 @@ export default function Project({
       }
     };
     fetchProjects();
-  }, [params.projectTitle]);
+  }, []);
   function getCorrectTitle(list: Project[]) {
     return list.find(
       (project) =>
@@ -58,7 +59,13 @@ export default function Project({
           ) : (
             <div className="project-container">
               <div className="project-image-data">
-                <img src={project?.project_image_url} alt="" />
+                <Image
+                  src={project?.project_image_url ?? "/default.png"}
+                  alt="project image"
+                  width={1920}
+                  height={1080}
+                  priority
+                />
               </div>
               <div className="project-data">
                 <div className="project-data-main">

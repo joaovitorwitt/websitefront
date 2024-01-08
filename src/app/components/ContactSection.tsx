@@ -15,7 +15,7 @@ export default function ContactSection() {
         <div className="section-description d-grid">
           <div className="scroll-reveal-left">
             <p className="description">
-              Let's work on something{" "}
+              Let&apos;s work on something{" "}
               <span className="text-bold">interesting</span>
             </p>
           </div>

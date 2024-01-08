@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Link from "next/link";
 import LoadingComponent from "../components/LoadingComponent";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Article {
   id: number;
@@ -22,10 +23,10 @@ export default function Articles() {
       try {
         const response = await fetch(
           // PRODUCTION API
-          //   "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
 
           // DEVELOPMENT API
-          "http://127.0.0.1:8000/api/v1/get/articles/"
+          // "http://127.0.0.1:8000/api/v1/get/articles/"
         );
         const result = await response.json();
         setArticles(result.articles);
@@ -93,11 +94,14 @@ export default function Articles() {
                 >
                   <div className="article-wrapper">
                     <div className="posts-article-image-wrapper">
-                      <img
-                        src={article.thumbnail}
+                      <Image
+                        src={article?.thumbnail}
                         key={article.id}
-                        alt=""
+                        alt="article image"
+                        width={1920}
+                        height={1080}
                         className="article-image"
+                        loading="lazy"
                       />
                     </div>
 

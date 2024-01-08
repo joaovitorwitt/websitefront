@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function PortfolioSection() {
   return (
@@ -18,9 +19,11 @@ export default function PortfolioSection() {
             className="portfolio-card portfolio-card-1"
           >
             <div className="card-image">
-              <img
+              <Image
                 src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/physics-model-project_oafck7.png"
                 alt="card1"
+                width={1920}
+                height={1080}
               />
             </div>
 
@@ -38,12 +41,13 @@ export default function PortfolioSection() {
             className="portfolio-card portfolio-card-2"
           >
             <div className="card-image">
-              <img
+              <Image
                 src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/quantum-programming-project_ejqzgb.png"
                 alt="card1"
+                width={1920}
+                height={1080}
               />
             </div>
-
             <div className="card-heading">
               <h5 className="card-title">Quantum Programming Project</h5>
               <span className="card-subtitle">
@@ -58,9 +62,11 @@ export default function PortfolioSection() {
             className="portfolio-card portfolio-card-3"
           >
             <div className="card-image">
-              <img
+              <Image
                 src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/blockchain-project-thumb_mvomf0.png"
                 alt="card1"
+                width={1920}
+                height={1080}
               />
             </div>
 
@@ -77,9 +83,11 @@ export default function PortfolioSection() {
             className="portfolio-card portfolio-card-4"
           >
             <div className="card-image">
-              <img
+              <Image
                 src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/physics-educational-platform_cdbv7e.jpg"
                 alt="card1"
+                width={1920}
+                height={1080}
               />
             </div>
 
@@ -97,9 +105,11 @@ export default function PortfolioSection() {
             className="portfolio-card portfolio-card-5"
           >
             <div className="card-image">
-              <img
+              <Image
                 src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/web-scraper-project_dfxzau.png"
                 alt="card1"
+                width={1920}
+                height={1080}
               />
             </div>
 
