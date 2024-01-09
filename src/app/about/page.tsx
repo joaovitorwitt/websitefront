@@ -120,14 +120,14 @@ export default function About() {
                   </ul>
                 </div>
 
-                <div className="message-me">
+                {/* <div className="message-me">
                   <h4>Send me a message</h4>
 
                   <div className="message-me-data-container">
                     <FontAwesomeIcon icon={faPhone} />
                     <p>+55 54 991109265</p>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <button className="download-resume-btn">
