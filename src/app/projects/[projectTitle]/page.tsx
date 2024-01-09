@@ -3,6 +3,7 @@ import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 
 interface Project {
   project_id: number;
@@ -11,11 +12,13 @@ interface Project {
   project_image_url: string;
 }
 
-export default function Project({
-  params,
-}: {
-  params: { projectTitle: string };
-}) {
+type Props = {
+  params: {
+    projectTitle: string;
+  };
+};
+
+export default function Project({ params }: Props) {
   // ==================================================== //
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);

@@ -13,6 +13,25 @@ config.autoAddCss = false;
 export const metadata: Metadata = {
   title: "João Vitor Witt",
   description: "Passionate about programing, math, and physics.",
+  creator: "João Vitor",
+  keywords: [
+    "Programming",
+    "Computer Science",
+    "Mathematics",
+    "Physics",
+    "Coding",
+    "Software Development",
+    "Algorithms",
+    "Web Development",
+    "Project Updates",
+    "Newsletter",
+    "JavaScript",
+    "Python",
+    "Physics Research",
+    "Mathematical Concepts",
+    "Educational Content",
+  ],
+  // add openGraph stuff here
 };
 
 export default function RootLayout({

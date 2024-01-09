@@ -4,6 +4,7 @@ import LoadingComponent from "@/app/components/LoadingComponent";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Metadata } from "next";
 
 interface Article {
   id: number;
@@ -14,16 +15,18 @@ interface Article {
   thumbnail: string;
 }
 
-export default function Article({
-  params,
-}: {
-  params: { articleTitle: string };
-}) {
+type Props = {
+  params: {
+    articleTitle: string;
+  };
+};
+
+export default function Article({ params }: Props) {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
 
   // metadata states
-  //   const [metadataInfo, setMetadataInfo] = useState(null);
+  // const [metadataInfo, setMetadataInfo] = useState(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -91,39 +94,6 @@ export default function Article({
 
   return (
     <div className="article-page-wrapper">
-      {/* {metadataInfo !== null ? (
-        <Helmet>
-          <title>{metadataInfo["title"]}</title>
-          <meta name="title" content={metadataInfo["title"]} />
-          <meta name="description" content={metadataInfo["description"]} />
-
-          <meta property="og:type" content="website" />
-          <meta
-            property="og:url"
-            content={`https://www.joaovitorwitt.com/articles/${formatTitleForURL(
-              metadataInfo["title"]
-            )}`}
-          />
-          <meta property="og:title" content={metadataInfo["title"]} />
-          <meta
-            property="og:description"
-            content={metadataInfo["description"]}
-          />
-          <meta
-            name="image"
-            property="og:image"
-            content={metadataInfo["thumbnail"]}
-          />
-          <meta name="author" content="João Vitor Witt"></meta>
-
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={metadataInfo["title"]} />
-          <meta
-            name="twitter:description"
-            content={metadataInfo["description"]}
-          />
-        </Helmet>
-      ) : null} */}
       <Header />
       <section className="blog-post section-header-offset">
         {loading ? (
