@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       images: correctArticle.thumbnail,
       description: correctArticle.description,
+      url: `https://www.joaovitorwitt.com/articles/${correctArticle.title
+        .toLowerCase()
+        .replace(/\s+/g, "-")}`,
     },
     twitter: {
       card: "summary_large_image",
