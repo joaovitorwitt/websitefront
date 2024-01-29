@@ -113,7 +113,7 @@ export default function Article({ params }: Props) {
                 alt="article"
               />
             </div>
-            /
+
             <div className="container">
               {article?.content && (
                 <p dangerouslySetInnerHTML={{ __html: article?.content }} />
