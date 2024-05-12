@@ -32,12 +32,14 @@ export default function Article({ params }: Props) {
     const fetchArticles = async () => {
       try {
         const response = await fetch(
-          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+          // "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+          "http://127.0.0.1:8000/api/v1/get/articles/"
         );
 
         const result = await response.json();
+        // console.log(result);
         const correctArticleTitle = getCorrectTitle(result.articles);
-        console.log(result.articles);
+        // console.log(result.articles);
         setArticle(correctArticleTitle);
       } catch (error) {
         console.log("Error fetching articles,", error);
@@ -54,10 +56,12 @@ export default function Article({ params }: Props) {
       (article: any) => formatTitleForURL(article.title) === params.articleTitle
     );
     // setMetadataInfo(correct);
+    console.log(correct.title);
     return correct;
   }
 
   function formatTitleForURL(title: any) {
+    console.log(title);
     return title.toLowerCase().replace(/\s+/g, "-");
   }
 

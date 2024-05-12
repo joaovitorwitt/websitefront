@@ -30,7 +30,7 @@ export default function Articles() {
         );
         const result = await response.json();
         setArticles(result.articles);
-        console.log("Fetched articles:", result.articles);
+        // console.log("Fetched articles:", result.articles);
       } catch (error) {
         console.error("Error fetching articles: ", error);
       } finally {
