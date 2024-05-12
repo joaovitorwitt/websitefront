@@ -105,7 +105,10 @@ export default function Article({ params }: Props) {
         ) : (
           <div className="blog-post-container container">
             <div className="blog-post-data">
-              <h3 className="blog-post-title title">{article?.title}</h3>
+              <h3 className="blog-post-title title">
+                {article?.title ?? "Article Not Found"}
+              </h3>
+
               <div className="article-data">
                 <span>{formatArticleDate(article?.publish_date)}</span>
               </div>
