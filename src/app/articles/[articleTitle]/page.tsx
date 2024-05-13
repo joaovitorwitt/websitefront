@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Metadata } from "next";
+import { title } from "process";
 
 interface Article {
   id: number;
@@ -56,12 +57,11 @@ export default function Article({ params }: Props) {
       (article: any) => formatTitleForURL(article.title) === params.articleTitle
     );
     // setMetadataInfo(correct);
-    console.log(correct.title);
+    console.log(correct?.title);
     return correct;
   }
 
   function formatTitleForURL(title: any) {
-    console.log(title);
     return title.toLowerCase().replace(/\s+/g, "-");
   }
 
@@ -96,6 +96,7 @@ export default function Article({ params }: Props) {
     return formattedDate;
   }
 
+  console.log(`TITLE: ${article?.title}`);
   return (
     <div className="article-page-wrapper">
       <Header />
