@@ -8,7 +8,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await fetch(
+    // PRODUCTION API
     "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+
+    // DEVELOPMENT API
+    // "http://127.0.0.1:8000/api/v1/get/articles/"
   );
   const result = await article.json();
   const correctArticle = result.articles.find(

@@ -27,10 +27,10 @@ export default function Project({ params }: Props) {
       try {
         const response = await fetch(
           // PRODUCTION API
-          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/projects/"
+          // "https://portfolio-backend-fdxe.onrender.com/api/v1/get/projects/"
 
           // DEVELOPMENT API
-          // "http://127.0.0.1:8000/api/v1/get/projects/"
+          "http://127.0.0.1:8000/api/v1/get/projects/"
         );
         const result = await response.json();
         const correctTitleProject = getCorrectTitle(result.projects);
