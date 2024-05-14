@@ -1,10 +1,17 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 "use client";
 import Header from "../components/Header";
 import Link from "next/link";
 import LoadingComponent from "../components/LoadingComponent";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { formatArticleDate, formatTitleForURL } from "@/app/utils";
 
+//////////////////////////////////////////////////////
+// Article Interface Implementation
+//////////////////////////////////////////////////////
 interface Article {
   id: number;
   title: string;
@@ -14,6 +21,9 @@ interface Article {
   thumbnail: string;
 }
 
+//////////////////////////////////////////////////////
+// Articles Component Implementation
+//////////////////////////////////////////////////////
 export default function Articles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,37 +50,6 @@ export default function Articles() {
 
     fetchArticles();
   }, []);
-
-  function formatTitleForURL(title: any) {
-    return title.toLowerCase().replace(/\s+/g, "-");
-  }
-
-  function formatArticleDate(date: any) {
-    const dateObject = new Date(date);
-
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    const day = dateObject.getDate();
-    const monthIndex = dateObject.getMonth();
-    const year = dateObject.getFullYear();
-
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
-
-    return formattedDate;
-  }
 
   return (
     <div className="articles-page-wrapper">

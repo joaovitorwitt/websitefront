@@ -1,10 +1,17 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 "use client";
 import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
+import { formatTitleForURL } from "@/app/utils";
+import LoadingComponent from "@/app/components/LoadingComponent";
 
+//////////////////////////////////////////////////////
+// Project Interface Implementation
+//////////////////////////////////////////////////////
 interface Project {
   project_id: number;
   project_title: string;
@@ -18,10 +25,13 @@ type Props = {
   };
 };
 
+//////////////////////////////////////////////////////
+// Project Component Implementation
+//////////////////////////////////////////////////////
 export default function Project({ params }: Props) {
-  // ==================================================== //
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -43,22 +53,21 @@ export default function Project({ params }: Props) {
     };
     fetchProjects();
   }, []);
+
   function getCorrectTitle(list: Project[]) {
     return list.find(
       (project) =>
         formatTitleForURL(project.project_title) === params.projectTitle
     );
   }
-  function formatTitleForURL(title: string) {
-    return title.toLowerCase().replace(/\s+/g, "-");
-  }
+
   return (
     <div className="project-page-wrapper">
       <Header />
       <div className="container">
         <section className="project-wrapper">
           {loading ? (
-            <p>Loading project...</p>
+            <LoadingComponent />
           ) : (
             <div className="project-container">
               <div className="project-image-data">

@@ -1,10 +1,17 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 "use client";
 import Header from "../components/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../components/LoadingComponent";
 import Image from "next/image";
+import { formatTitleForURL } from "@/app/utils";
 
+//////////////////////////////////////////////////////
+// Project Interface Implementation
+//////////////////////////////////////////////////////
 interface Project {
   project_id: number;
   project_title: string;
@@ -12,6 +19,9 @@ interface Project {
   project_image_url: string;
 }
 
+//////////////////////////////////////////////////////
+// Projects Component Implementation
+//////////////////////////////////////////////////////
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +39,6 @@ export default function Projects() {
 
         const result = await response.json();
         setProjects(result.projects);
-        // console.log("Fetched projects: ", result.projects);
       } catch (error) {
         console.log("Error fetching projects, ", error);
       } finally {
@@ -40,9 +49,6 @@ export default function Projects() {
     fetchProjects();
   }, []);
 
-  function formatTitleForURL(title: any) {
-    return title.toLowerCase().replace(/\s+/g, "-");
-  }
   return (
     <div className="projects-page-wrapper">
       <Header />

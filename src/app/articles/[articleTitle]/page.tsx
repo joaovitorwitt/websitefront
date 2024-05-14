@@ -1,12 +1,17 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 "use client";
 import Header from "@/app/components/Header";
 import LoadingComponent from "@/app/components/LoadingComponent";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Metadata } from "next";
-import { title } from "process";
+import { formatArticleDate, formatTitleForURL } from "@/app/utils";
 
+//////////////////////////////////////////////////////
+// Article Interface
+//////////////////////////////////////////////////////
 interface Article {
   id: number;
   title: string;
@@ -22,25 +27,25 @@ type Props = {
   };
 };
 
+//////////////////////////////////////////////////////
+// Article Component
+//////////////////////////////////////////////////////
 export default function Article({ params }: Props) {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // metadata states
-  // const [metadataInfo, setMetadataInfo] = useState(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const response = await fetch(
+          // PRODUCTION API
           "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+
+          // DEVELOPMENT API
           // "http://127.0.0.1:8000/api/v1/get/articles/"
         );
-
         const result = await response.json();
-        // console.log(result);
         const correctArticleTitle = getCorrectTitle(result.articles);
-        // console.log(result.articles);
         setArticle(correctArticleTitle);
       } catch (error) {
         console.log("Error fetching articles,", error);
@@ -56,47 +61,10 @@ export default function Article({ params }: Props) {
     const correct = list.find(
       (article: any) => formatTitleForURL(article.title) === params.articleTitle
     );
-    // setMetadataInfo(correct);
     console.log(correct?.title);
     return correct;
   }
 
-  function formatTitleForURL(title: any) {
-    return title.toLowerCase().replace(/\s+/g, "-");
-  }
-
-  function formatArticleDate(date: any) {
-    // Create a new Date object from the input string
-    const dateObject = new Date(date);
-
-    // Define the months array
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-
-    // Extract day, month, and year from the date object
-    const day = dateObject.getDate();
-    const monthIndex = dateObject.getMonth();
-    const year = dateObject.getFullYear();
-
-    // Format the date string
-    const formattedDate = `${months[monthIndex]} ${day}, ${year}`;
-
-    return formattedDate;
-  }
-
-  console.log(`TITLE: ${article?.title}`);
   return (
     <div className="article-page-wrapper">
       <Header />
