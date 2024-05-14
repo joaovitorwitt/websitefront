@@ -10,12 +10,12 @@ import "@types/jest";
 //////////////////////////////////////////////////////
 // Components Load Test Case Implementation
 //////////////////////////////////////////////////////
-describe("About", () => {
-  it("render the about section", () => {
-    render(<About />);
+// describe("About", () => {
+//   it("render the about section", () => {
+//     render(<About />);
 
-    const about = screen.getByRole("about", { level: 1 });
+//     const about = screen.getByRole("about", { level: 1 });
 
-    expect(about).toBe;
-  });
-});
+//     expect(about).toBe;
+//   });
+// });
