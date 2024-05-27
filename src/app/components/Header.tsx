@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 
 // import "../assets/css/globals.css";
-import "../assets/css/header.modules.css";
+import "../assets/css/components/header.modules.css";
 
 //////////////////////////////////////////////////////
 // Header Component Implementation

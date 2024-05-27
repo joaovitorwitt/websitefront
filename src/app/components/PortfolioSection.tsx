@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import "../assets/css/components/portfolio.modules.css"
 
 export default function PortfolioSection() {
   return (

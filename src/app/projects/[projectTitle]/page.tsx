@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatTitleForURL } from "@/app/utils";
 import LoadingComponent from "@/app/components/LoadingComponent";
+import "../../assets/css/pages/project/project.modules.css"
 
 //////////////////////////////////////////////////////
 // Project Interface Implementation

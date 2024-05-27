@@ -1,0 +1,33 @@
+.project-page-wrapper {
+    background-color: var(--default-background-color);
+    color: var(--default-text-color);
+    height: 100vh;
+  }
+  
+  .project-image-data img {
+    margin: 0 auto;
+    width: 60%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 10px;
+  }
+  
+  .project-data {
+    width: 60%;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .return-projects {
+    border: 1px solid var(--default-text-color);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    transition: 0.25s;
+  }
+  
+  .return-projects:hover {
+    background-color: #80869462;
+  }

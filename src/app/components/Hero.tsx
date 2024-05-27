@@ -1,4 +1,4 @@
-import { ThemeProvider, useTheme } from "next-themes";
+import "../assets/css/components/hero.modules.css"
 
 export default function Hero() {
   return (

@@ -8,6 +8,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { formatArticleDate, formatTitleForURL } from "@/app/utils";
+import "../assets/css/pages/articles/articles.modules.css"
 
 //////////////////////////////////////////////////////
 // Article Interface Implementation

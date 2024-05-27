@@ -10,7 +10,7 @@ import Image from "next/image";
 import { formatArticleDate, formatTitleForURL } from "@/app/utils";
 import MathFormula from "@/app/components/MathJax";
 import Head from "next/head";
-import Script from "next/script";
+import "../../assets/css/pages/article/article.modules.css"
 
 //////////////////////////////////////////////////////
 // Article Interface
