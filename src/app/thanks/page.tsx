@@ -2,6 +2,7 @@
 import { RevealWrapper } from "next-reveal";
 import Header from "../components/Header";
 import Link from "next/link";
+import "../assets/css/pages/thankyou/thankyou.modules.css"
 
 export default function ThanksContact() {
   return (

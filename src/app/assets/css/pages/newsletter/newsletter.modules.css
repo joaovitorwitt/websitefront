@@ -1,0 +1,37 @@
+.newsletter-page-wrapper {
+    background-color: var(--default-background-color);
+    color: var(--default-text-color);
+    transition: 0.4s;
+    height: 100vh;
+  }
+  
+  .newsletter-container {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+  
+  .newsletter-title {
+    margin-bottom: 2.6rem;
+  }
+  
+  .email {
+    width: 100%;
+    border: 1px solid var(--default-text-color);
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 2rem 0;
+  }
+  
+  .newsletter-btn {
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: var(--default-text-color);
+    color: var(--default-background-color);
+    cursor: pointer;
+    transition: 0.14s;
+  }
+  
+  .newsletter-btn:hover {
+    background-color: #a19e9ec9;
+  }

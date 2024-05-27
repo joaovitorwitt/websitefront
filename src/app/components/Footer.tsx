@@ -10,7 +10,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
-import "../assets/css/footer.modules.css";
+import "../assets/css/components/footer.modules.css";
 
 //////////////////////////////////////////////////////
 // Footer Component Implementation
