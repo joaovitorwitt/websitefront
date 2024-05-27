@@ -1,3 +1,6 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 "use client";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -10,8 +13,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import "../assets/css/globals.css";
+// import "../assets/css/globals.css";
+import "../assets/css/header.modules.css";
 
+//////////////////////////////////////////////////////
+// Header Component Implementation
+//////////////////////////////////////////////////////
 export default function Header() {
   const { theme = "light", setTheme } = useTheme();
 

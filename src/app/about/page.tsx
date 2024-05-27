@@ -1,3 +1,6 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 "use client";
 import Header from "../components/Header";
 import { RevealWrapper } from "next-reveal";
@@ -12,9 +15,12 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faFile, faF } from "@fortawesome/free-solid-svg-icons";
+import { faFile } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
+//////////////////////////////////////////////////////
+// About Page Component
+//////////////////////////////////////////////////////
 export default function About() {
   const { theme = "light", setTheme } = useTheme();
 
@@ -37,10 +43,12 @@ export default function About() {
               <h3>João Vitor Witt (pronounced: John)</h3>
 
               <p className="about-me-description">
-                I&apos;m enthusiastic about the captivating realms of Web3 and
-                AI. While exploring deeper into the Computer Science realm.{" "}
+                I&apos;m enthusiastic about exploring the fields of mathematics,
+                physics, and computer science. Here, you will find content about
+                these topics. My goal is to help humanity advance as an
+                intelligent species.
                 <Link href={"/articles"} className="article-redirection">
-                  Check out my articles
+                  <strong>Check out my articles</strong>
                 </Link>
               </p>
 
@@ -119,15 +127,6 @@ export default function About() {
                     </li>
                   </ul>
                 </div>
-
-                {/* <div className="message-me">
-                  <h4>Send me a message</h4>
-
-                  <div className="message-me-data-container">
-                    <FontAwesomeIcon icon={faPhone} />
-                    <p>+55 54 991109265</p>
-                  </div>
-                </div> */}
               </div>
 
               <button className="download-resume-btn">

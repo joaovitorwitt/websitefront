@@ -1,8 +1,9 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 import { useEffect } from "react";
-import dynamic from "next/dynamic";
 import Typed from "typed.js";
 import "../assets/css/globals.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFigma,
@@ -13,9 +14,11 @@ import {
   faReact,
   faPython,
 } from "@fortawesome/free-brands-svg-icons";
-
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
+//////////////////////////////////////////////////////
+// About Section Component
+//////////////////////////////////////////////////////
 export default function AboutSection() {
   useEffect(() => {
     let typed = new Typed("#changing", {
