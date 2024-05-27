@@ -205,17 +205,6 @@ button {
 /* LOADING ANIMATION COMPONENT */
 
 /* MEDIA QUERIES */
-@media screen and (max-width: 700px) {
-  .about-me-wrapper {
-    grid-template-columns: 1fr;
-    row-gap: 3rem;
-  }
-
-  .profile-picture {
-    width: 50%;
-    margin: 0 auto;
-  }
-}
 
 @media screen and (min-width: 768px) {
   .container {
