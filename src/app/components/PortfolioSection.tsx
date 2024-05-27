@@ -15,7 +15,7 @@ export default function PortfolioSection() {
 
         <div className="portfolio-cards d-grid">
           <Link
-            href={"/projects/ai-research-model"}
+            href={"/projects/halting"}
             className="portfolio-card portfolio-card-1"
           >
             <div className="card-image">
@@ -28,10 +28,11 @@ export default function PortfolioSection() {
             </div>
 
             <div className="card-heading">
-              <h5 className="card-title">AI Research Model</h5>
+              <h5 className="card-title">Halting</h5>
               <span className="card-subtitle">
-                AI model that can solve complex mathematical and physics
-                questions.
+                This library physics library allows you to manipulate and deal
+                with physical quantities such as mass, time, length, energy, and
+                much more.
               </span>
             </div>
           </Link>
@@ -51,14 +52,14 @@ export default function PortfolioSection() {
             <div className="card-heading">
               <h5 className="card-title">Quantum Programming Project</h5>
               <span className="card-subtitle">
-                My Greatest project, shaping the next generation of quantum
-                programing. Stay tunned for updates
+                Shaping the next generation of quantum programing. Stay tunned
+                for updates
               </span>
             </div>
           </Link>
 
           <Link
-            href={"/projects/blockchain-ecosystem"}
+            href={"/projects/physics-engine"}
             className="portfolio-card portfolio-card-3"
           >
             <div className="card-image">
@@ -71,14 +72,15 @@ export default function PortfolioSection() {
             </div>
 
             <div className="card-heading">
-              <h5 className="card-title">Blockchain Ecosystem</h5>
+              <h5 className="card-title">Physics Engine</h5>
               <span className="card-subtitle">
-                Build, test, run, and deploy all your blockchain operations.
+                Physics engine built in C, designed to perform real world
+                simulations of objects, planets, and particles.
               </span>
             </div>
           </Link>
 
-          <Link
+          {/* <Link
             href={"/projects/physics-educational-platform"}
             className="portfolio-card portfolio-card-4"
           >
@@ -92,15 +94,14 @@ export default function PortfolioSection() {
             </div>
 
             <div className="card-heading">
-              <h5 className="card-title">Physics Educational Platform</h5>
+              <h5 className="card-title">Unknown Project #1</h5>
               <span className="card-subtitle">
-                Take your physics knownledge to the next level with real
-                simulations.
+                Soon. Stay Tuned for updates.
               </span>
             </div>
-          </Link>
+          </Link> */}
 
-          <Link
+          {/* <Link
             href={"/projects/academic-paper-scraper"}
             className="portfolio-card portfolio-card-5"
           >
@@ -114,15 +115,14 @@ export default function PortfolioSection() {
             </div>
 
             <div className="card-heading">
-              <h5 className="card-title">Academic Paper Scraper</h5>
+              <h5 className="card-title">Unknown Project #2</h5>
               <span className="card-subtitle">
-                Gather all the information from the scientific community in one
-                place
+                Soon. Stay tuned for updates.
               </span>
             </div>
-          </Link>
+          </Link> */}
 
-          <div className="portfolio-card portfolio-card-6 large-button-container">
+          <div className="portfolio-card portfolio-card-4 large-button-container">
             <Link href={"/projects"} className="large-button button-fill">
               See
               <br />

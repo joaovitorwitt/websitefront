@@ -1,3 +1,6 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -7,7 +10,11 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
+import "../assets/css/footer.modules.css";
 
+//////////////////////////////////////////////////////
+// Footer Component Implementation
+//////////////////////////////////////////////////////
 export default function Footer() {
   const date = new Date();
   let year = date.getFullYear();
