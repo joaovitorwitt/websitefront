@@ -1,0 +1,22 @@
+.thankyou-page-wrapper {
+    background-color: var(--default-background-color);
+    color: var(--default-text-color);
+    height: 100vh;
+  }
+  
+  .thankyou-description,
+  .thankyou-description-two {
+    margin-bottom: 4rem;
+  }
+  
+  .thankyou-redirections {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .thankyou-redirections > a {
+    border: 1px solid var(--default-text-color);
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+  }
+  

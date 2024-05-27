@@ -16,6 +16,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
+import "../assets/css/components/about.modules.css"
+
 //////////////////////////////////////////////////////
 // About Section Component
 //////////////////////////////////////////////////////

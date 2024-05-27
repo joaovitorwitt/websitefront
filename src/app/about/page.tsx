@@ -17,6 +17,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import "../assets/css/pages/about/about.modules.css"
 
 //////////////////////////////////////////////////////
 // About Page Component

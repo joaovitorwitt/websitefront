@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import LoadingComponent from "../components/LoadingComponent";
 import Image from "next/image";
 import { formatTitleForURL } from "@/app/utils";
+import "../assets/css/pages/projects/projects.modules.css"
 
 //////////////////////////////////////////////////////
 // Project Interface Implementation
