@@ -16,7 +16,10 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "better-react-mathjax": "^2.0.3",
     "jsonp": "^0.2.1",
+    "katex": "^0.16.10",
+    "mathjax": "^3.2.2",
     "next": "14.0.4",
     "next-reveal": "^1.0.6",
     "next-themes": "^0.2.1",
@@ -28,6 +31,7 @@
   "devDependencies": {
     "@testing-library/react": "^15.0.7",
     "@types/jsonp": "^0.2.3",
+    "@types/katex": "^0.16.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

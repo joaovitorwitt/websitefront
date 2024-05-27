@@ -1,15 +1,16 @@
+//////////////////////////////////////////////////////
+// Imports
+//////////////////////////////////////////////////////
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./assets/css/globals.css";
 import { Providers } from "./providers";
-
-// font awesome
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
-// const inter = Inter({ subsets: ["latin"] });
-
+//////////////////////////////////////////////////////
+// Metadata Implementation
+//////////////////////////////////////////////////////
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.joaovitorwitt.com/"),
   title: "João Vitor Witt",
@@ -35,6 +36,9 @@ export const metadata: Metadata = {
   // add openGraph stuff here
 };
 
+//////////////////////////////////////////////////////
+// Root Layout Component
+//////////////////////////////////////////////////////
 export default function RootLayout({
   children,
 }: {
@@ -42,7 +46,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* <body className={inter.className}> */}
       <body>
         <Providers>{children}</Providers>
       </body>
