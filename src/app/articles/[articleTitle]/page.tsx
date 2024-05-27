@@ -77,7 +77,10 @@ export default function Article({ params }: Props) {
   return (
     <>
       <Head>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script
+          src="https://polyfill.io/v3/polyfill.min.js?features=es6"
+          async
+        ></script>
         <script
           id="MathJax-script"
           async
