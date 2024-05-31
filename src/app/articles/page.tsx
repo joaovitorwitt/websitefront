@@ -8,7 +8,9 @@ import LoadingComponent from "../components/LoadingComponent";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { formatArticleDate, formatTitleForURL } from "@/app/utils";
-import "../assets/css/pages/articles/articles.modules.css"
+import "../assets/css/pages/articles/articles.modules.css";
+import "../assets/css/globals.css";
+import RoundButton from "../components/RoundButton";
 
 //////////////////////////////////////////////////////
 // Article Interface Implementation
@@ -108,9 +110,7 @@ export default function Articles() {
           className="large-button-container"
           style={{ paddingTop: "3rem", paddingBottom: "3rem" }}
         >
-          <Link href={"/"} className="large-button button-fill">
-            Return
-          </Link>
+          <RoundButton url={"/"} buttonText={"Return"} />
         </div>
       </div>
     </div>

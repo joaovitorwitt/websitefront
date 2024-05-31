@@ -111,12 +111,6 @@ export default function Header() {
                 <span>03</span> Articles
               </Link>
             </li>
-
-            <li className="list-item">
-              <Link href={"/newsletter"} className="list-link">
-                <span>04</span> Newsletter
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>

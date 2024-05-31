@@ -8,7 +8,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatTitleForURL } from "@/app/utils";
 import LoadingComponent from "@/app/components/LoadingComponent";
-import "../../assets/css/pages/project/project.modules.css"
+import "../../assets/css/pages/project/project.modules.css";
+import RoundButton from "@/app/components/RoundButton";
 
 //////////////////////////////////////////////////////
 // Project Interface Implementation
@@ -89,9 +90,12 @@ export default function Project({ params }: Props) {
                     {project?.project_description}
                   </p>
                 </div>
-                <Link href="/projects" legacyBehavior>
-                  <a className="return-projects">Return</a>
-                </Link>
+              </div>
+              <div
+                className="large-button-container"
+                style={{ marginTop: "2rem" }}
+              >
+                <RoundButton url={"/projects"} buttonText={"Return"} />
               </div>
             </div>
           )}

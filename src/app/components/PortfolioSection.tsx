@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import "../assets/css/components/portfolio.modules.css"
+import "../assets/css/components/portfolio.modules.css";
+import RoundButton from "./RoundButton";
 
 export default function PortfolioSection() {
   return (
@@ -81,54 +82,8 @@ export default function PortfolioSection() {
             </div>
           </Link>
 
-          {/* <Link
-            href={"/projects/physics-educational-platform"}
-            className="portfolio-card portfolio-card-4"
-          >
-            <div className="card-image">
-              <Image
-                src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/physics-educational-platform_cdbv7e.jpg"
-                alt="card1"
-                width={1920}
-                height={1080}
-              />
-            </div>
-
-            <div className="card-heading">
-              <h5 className="card-title">Unknown Project #1</h5>
-              <span className="card-subtitle">
-                Soon. Stay Tuned for updates.
-              </span>
-            </div>
-          </Link> */}
-
-          {/* <Link
-            href={"/projects/academic-paper-scraper"}
-            className="portfolio-card portfolio-card-5"
-          >
-            <div className="card-image">
-              <Image
-                src="https://res.cloudinary.com/djmr9rxjg/image/upload/v1704252733/project-images/web-scraper-project_dfxzau.png"
-                alt="card1"
-                width={1920}
-                height={1080}
-              />
-            </div>
-
-            <div className="card-heading">
-              <h5 className="card-title">Unknown Project #2</h5>
-              <span className="card-subtitle">
-                Soon. Stay tuned for updates.
-              </span>
-            </div>
-          </Link> */}
-
           <div className="portfolio-card portfolio-card-4 large-button-container">
-            <Link href={"/projects"} className="large-button button-fill">
-              See
-              <br />
-              All
-            </Link>
+            <RoundButton url={"/projects"} buttonText={"See All"} />
           </div>
         </div>
       </div>

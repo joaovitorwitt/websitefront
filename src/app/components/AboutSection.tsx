@@ -3,7 +3,6 @@
 //////////////////////////////////////////////////////
 import { useEffect } from "react";
 import Typed from "typed.js";
-import "../assets/css/globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFigma,
@@ -15,10 +14,12 @@ import {
   faPython,
 } from "@fortawesome/free-brands-svg-icons";
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
+
+// import "../assets/css/globals.css";
 import "../assets/css/components/about.modules.css";
 
 //////////////////////////////////////////////////////
-// About Section Component
+// About Section Component - section that has the programming languages
 //////////////////////////////////////////////////////
 export default function AboutSection() {
   useEffect(() => {

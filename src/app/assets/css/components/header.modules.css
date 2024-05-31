@@ -75,7 +75,6 @@
 
 .list-link {
   font-size: 1.4rem;
-  /* color: var(--default-background-color); */
 }
 
 .list-link:hover,
@@ -114,4 +113,10 @@
 
 .dark-theme .theme-on {
   display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 96rem;
+  }
 }

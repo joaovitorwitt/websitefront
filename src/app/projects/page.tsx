@@ -2,13 +2,16 @@
 // Imports
 //////////////////////////////////////////////////////
 "use client";
-import Header from "../components/Header";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import LoadingComponent from "../components/LoadingComponent";
 import Image from "next/image";
+
+import { useEffect, useState } from "react";
+import "../assets/css/pages/projects/projects.modules.css";
+
 import { formatTitleForURL } from "@/app/utils";
-import "../assets/css/pages/projects/projects.modules.css"
+import Header from "../components/Header";
+import LoadingComponent from "../components/LoadingComponent";
+import RoundButton from "../components/RoundButton";
 
 //////////////////////////////////////////////////////
 // Project Interface Implementation
@@ -94,12 +97,10 @@ export default function Projects() {
         </div>
 
         <div
-          className="large-button-container"
+          className="portfolio-card large-button-container"
           style={{ paddingTop: "3rem", paddingBottom: "3rem" }}
         >
-          <Link href={"/"} className="large-button button-fill">
-            Return
-          </Link>
+          <RoundButton url={"/"} buttonText={"Return"} />
         </div>
       </div>
     </div>
