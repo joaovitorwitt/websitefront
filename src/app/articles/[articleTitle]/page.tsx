@@ -10,7 +10,8 @@ import Image from "next/image";
 import { formatArticleDate, formatTitleForURL } from "@/app/utils";
 import MathFormula from "@/app/components/MathJax";
 import Head from "next/head";
-import "../../assets/css/pages/article/article.modules.css"
+import "../../assets/css/pages/article/article.modules.css";
+import RoundButton from "@/app/components/RoundButton";
 
 //////////////////////////////////////////////////////
 // Article Interface
@@ -109,6 +110,7 @@ export default function Article({ params }: Props) {
                   width={1920}
                   height={1080}
                   alt="article"
+                  priority
                 />
               </div>
 
@@ -122,9 +124,7 @@ export default function Article({ params }: Props) {
         </section>
 
         <div className="large-button-container" style={{ padding: "3rem 0" }}>
-          <Link href={"/articles"} className="large-button button-fill">
-            Return
-          </Link>
+          <RoundButton url={"/articles"} buttonText={"Return"} />
         </div>
       </div>
     </>
