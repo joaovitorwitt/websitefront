@@ -1,4 +1,4 @@
-.section {
+/* .section {
   padding-block: var(--section-vertical-spacing);
   position: relative;
 }
@@ -109,5 +109,130 @@
     height: 1rem;
     top: 1.5rem;
     right: -1.5rem;
+  }
+} */
+
+/************************************/
+
+:root {
+  --translate-x: 0px;
+  --translate-y: 0px;
+}
+
+/************************************/
+/* STARS FEATURE */
+/************************************/
+.stars-overflow {
+  z-index: -2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  overflow: hidden;
+  height: 500px;
+  animation-duration: 70s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: heroBlackHoleStarsRotate;
+  transform: translate(-50%, -50%);
+  animation-timeline: auto;
+  animation-range-start: normal;
+}
+
+.star-animation {
+  position: absolute;
+  width: 4px;
+  top: 50%;
+  height: 4px;
+  border-radius: 5px;
+  background-color: var(--default-text-color);
+  transform: translateZ(0) translate(0) scale(1);
+  animation-name: blackHoleOrbit;
+  animation-duration: 10.7s;
+  animation-delay: 4.7s;
+  animation-iteration-count: infinite;
+}
+
+/* @keyframes blackHoleOrbit {
+  0% {
+    background-color: var(--default-text-color);
+    transform: translateZ(0) translate(0) scale(1);
+  }
+  10% {
+    background-color: var(--default-background-color);
+  }
+  100% {
+    background-color: var(--default-background-color);
+    transform: translateZ(0) translate(var(--translate-x), var(--translate-y))
+      scale(0.5);
+  }
+} */
+
+/* @keyframes heroBlackHoleStarsRotate {
+  0% {
+    transform: translateZ(0) translate(-50%, -50%) rotate(0);
+  }
+
+  100% {
+    transform: translateZ(0) translate(-50%, -50%) rotate(-360deg);
+  }
+} */
+
+/* BLACK HOLE STUFF */
+
+.black-hole-wrapper {
+  display: flex;
+  justify-content: center;
+  animation-name: init;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+  transition-timing-function: ease-out;
+}
+
+@keyframes init {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.shadow {
+  width: 20vw;
+  height: 20vw;
+  background-color: var(--black-hole-color);
+  border-radius: 100%;
+  grid-area: shadow;
+  box-shadow: 4px 6px 20px 2px var(--black-hole-color);
+  z-index: 5;
+  animation: shadow 2s ease-in-out 0.5s infinite alternate;
+}
+
+@keyframes shadow {
+  0% {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(30deg);
+  }
+  40% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(50deg);
+  }
+  70% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(180deg);
   }
 }
