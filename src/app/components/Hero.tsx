@@ -13,7 +13,7 @@ export default function Hero() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    const newStars = Array.from({ length: 1 }, (_, index) => {
+    const newStars = Array.from({ length: 100 }, (_, index) => {
       const randomAnimationDuration = (Math.random() * (11 - 4) + 4).toFixed(2);
       const randomAnimationDelay = (Math.random() * (5 - 1) + 1).toFixed(2);
       const randomLeftValue = (Math.random() * (90 - 10) + 10).toFixed(9);
@@ -41,18 +41,18 @@ export default function Hero() {
   return (
     <section className="hero section">
       <div className="container">
-        {/* <h1 className="title main-title">
-          Crea<span className="inline-image has-sparkles"></span>tive
-          <br />
-          Develope<span className="has-sparkles-alt">r</span>
-        </h1> */}
-        <div className="black-hole-wrapper">
-          <div className="doppler-beaming"></div>
-          <div className="photon-ring"></div>
-          <div className="accretion-disk"></div>
-          <div className="backdrop"></div>
-          <div className="shadow"></div>
-        </div>
+        <h1 className="title main-title">
+          Creative
+          <div className="black-hole-wrapper">
+            <div className="doppler-beaming"></div>
+            <div className="photon-ring"></div>
+            <div className="accretion-disk"></div>
+            <div className="backdrop"></div>
+            <div className="shadow"></div>
+          </div>
+          Developer
+        </h1>
+
         <div className="stars-overflow">
           {stars.map((star) => (
             <div
