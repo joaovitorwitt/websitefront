@@ -32,92 +32,11 @@
   line-height: 1.2;
 }
 
-.inline-image {
-  width: 7rem;
-  height: 7rem;
-  background: url(../../images/statue_hero.png) top center no-repeat;
-  background-size: cover;
-  border-radius: 50%;
-  border-bottom-left-radius: 0;
-  margin: 0 1.5rem;
-}
-
-.inline-image.has-sparkles::before {
-  width: 1rem;
-  height: 1rem;
-  top: -0.5rem;
-  right: -0.5rem;
-}
-
-.inline-image.has-sparkles::after {
-  width: 0.8rem;
-  height: 0.8rem;
-  bottom: 1rem;
-  right: -1.5rem;
-}
-
-.has-sparkles,
-.has-sparkles-alt {
-  position: relative;
-}
-
-.has-sparkles::before,
-.has-sparkles::after {
-  content: "";
-  position: absolute;
-  background: url(../../images/sparkle.png) center no-repeat;
-  background-size: cover;
-}
-
-.dark-theme .has-sparkles::before,
-.dark-theme .has-sparkles::after {
-  background: url(../../images/sparkle_light.png) center no-repeat;
-  background-size: cover;
-}
-
-.has-sparkles-alt::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 5vw;
-  max-width: 5rem;
-  height: 5vw;
-  max-height: 5rem;
-  background: url(../../images/sparkle_alt.png) center no-repeat;
-  background-size: cover;
-}
-
-.dark-theme .has-sparkles-alt::after {
-  background: url(../../images/sparkle_alt_light.png) center no-repeat;
-  background-size: cover;
-}
-
-@media screen and (min-width: 768px) {
-  .inline-image {
-    width: 15rem;
-    height: 15rem;
-  }
-
-  .inline-image.has-sparkles::before {
-    width: 1.5rem;
-    height: 1.5rem;
-    top: -1rem;
-    right: -1rem;
-  }
-
-  .inline-image.has-sparkles::after {
-    width: 1rem;
-    height: 1rem;
-    top: 1.5rem;
-    right: -1.5rem;
-  }
-}
-
 /************************************/
 
 :root {
-  --translate-x: 0px;
-  --translate-y: 0px;
+  --translate-x: 0%;
+  --translate-y: 0%;
 }
 
 /************************************/
@@ -130,15 +49,15 @@
   left: 50%;
   width: 100%;
   overflow: hidden;
-  height: 500px;
+  height: 1200px;
   animation-duration: 70s;
   animation-timing-function: linear;
-  animation-delay: 0s;
   animation-iteration-count: infinite;
+  animation-delay: 0s;
   animation-direction: normal;
   animation-fill-mode: none;
   animation-play-state: running;
-  animation-name: heroBlackHoleStarsRotate;
+  animation-name: startsOrbit;
   transform: translate(-50%, -50%);
   animation-timeline: auto;
   animation-range-start: normal;
@@ -147,39 +66,48 @@
 .star-animation {
   position: absolute;
   width: 4px;
-  top: 50%;
   height: 4px;
+  top: 50%;
   border-radius: 5px;
   background-color: var(--default-text-color);
-  transform: translateZ(0) translate(0) scale(1);
-  animation-name: blackHoleOrbit;
-  animation-duration: 10.7s;
-  animation-delay: 4.7s;
+  animation-name: blackHoleAttraction;
+  animation-delay: 0s;
   animation-iteration-count: infinite;
 }
 
-@keyframes blackHoleOrbit {
+@keyframes starsInit {
   0% {
-    background-color: var(--default-text-color);
-    transform: translateZ(0) translate(0) scale(1);
+    transform: scale(0);
   }
-  10% {
-    background-color: var(--default-background-color);
-  }
+
   100% {
-    background-color: var(--default-background-color);
-    transform: translateZ(0) translate(var(--translate-x), var(--translate-y))
-      scale(0.5);
+    transform: scale(1);
   }
 }
 
-@keyframes heroBlackHoleStarsRotate {
+/* this animation makes the starts go to the center of the black hole */
+@keyframes blackHoleAttraction {
+  0% {
+    opacity: 1;
+    transform: translateZ(0) translate(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateZ(0) translate(var(--translate-x), var(--translate-y))
+      scale(0.7);
+    top: var(--translate-y);
+    left: var(--translate-x);
+  }
+}
+
+@keyframes startsOrbit {
   0% {
     transform: translateZ(0) translate(-50%, -50%) rotate(0);
   }
 
   100% {
-    transform: translateZ(0) translate(-50%, -50%) rotate(-360deg);
+    transform: translateZ(0) translate(-50%, -50%) rotate(-2500deg);
   }
 }
 
@@ -187,25 +115,31 @@
 
 .black-hole-wrapper {
   z-index: -99;
-  position: absolute;
   display: flex;
   justify-content: center;
-  width: 100%;
-  animation-name: init;
-  animation-duration: 4s;
+  animation-name: blackHoleInit;
+  animation-duration: 2s;
   animation-iteration-count: 1;
   animation-fill-mode: both;
   transition-timing-function: ease-out;
 }
 
-@keyframes init {
+@keyframes blackHoleInit {
   0% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(1.6);
   }
-  100% {
+
+  30% {
     opacity: 1;
-    transform: none;
+  }
+
+  97% {
+    transform: scale(0.3);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
 

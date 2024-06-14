@@ -3,25 +3,31 @@ import "../assets/css/components/hero.modules.css";
 
 interface Star {
   id: number;
-  left: string;
-  top: string;
-  randomAnimationDuration: string;
-  randomAnimationDelay: string;
+  left: string | number;
+  top: string | number;
+  randomAnimationDuration: string | number;
+  randomAnimationDelay: string | number;
 }
 
 export default function Hero() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    const newStars = Array.from({ length: 100 }, (_, index) => {
+    const newStars = Array.from({ length: 200 }, (_, index) => {
       const randomAnimationDuration = (Math.random() * (11 - 4) + 4).toFixed(2);
       const randomAnimationDelay = (Math.random() * (5 - 1) + 1).toFixed(2);
-      const randomLeftValue = (Math.random() * (90 - 10) + 10).toFixed(9);
-      const randomTopValue = (Math.random() * (90 - 10) + 10).toFixed(9);
+      const randomLeftValue = (Math.random() * (90 - 10) + 10).toFixed(2);
+      const randomTopValue = (Math.random() * (90 - 10) + 10).toFixed(2);
+
+      console.log(`RANDOM LEFT VALUE: ${randomLeftValue}`);
+      console.log(`RANDOM TOP VALUE: ${randomTopValue}`);
+
       return {
         id: index,
+
         left: randomLeftValue,
         top: randomTopValue,
+
         randomAnimationDuration,
         randomAnimationDelay,
       };
@@ -29,14 +35,28 @@ export default function Hero() {
 
     setStars(newStars);
 
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
     const star = newStars[0];
-    const dx = centerX - (parseFloat(star.left) / 100) * window.innerWidth;
-    const dy = centerY - (parseFloat(star.top) / 100) * window.innerHeight;
-    document.documentElement.style.setProperty("--translate-x", `${dx}px`);
-    document.documentElement.style.setProperty("--translate-y", `${dy}px`);
+
+    const xFactor = parseFloat(star.left) / 50;
+    const xPosition = parseFloat(star.left) / xFactor;
+
+    const yFactor = parseFloat(star.top) / 50;
+    const yPosition = parseFloat(star.top) / yFactor;
+
+    console.log(`Y TO ${yPosition}`);
+    console.log(`X TO ${xPosition}`);
+
+    document.documentElement.style.setProperty(
+      "--translate-x",
+      `${xPosition}%`
+    );
+    document.documentElement.style.setProperty(
+      "--translate-y",
+      `${yPosition}%`
+    );
   }, []);
+
+  // MOVING IN PIXELS NOT IN ACTUAL PERCENTAGE
 
   return (
     <section className="hero section">
