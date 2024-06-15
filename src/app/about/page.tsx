@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import "../assets/css/pages/about/about.modules.css";
+import PageGlow from "../components/PageGlow";
 
 //////////////////////////////////////////////////////
 // About Page Component
@@ -29,6 +30,7 @@ export default function About() {
     <div data-theme={theme}>
       <RevealWrapper>
         <Header />
+        <PageGlow />
         <div className="container">
           <div className="about-me-wrapper">
             <div className="profile-picture">

@@ -26,9 +26,9 @@ export default function AboutSection() {
     let typed = new Typed("#changing", {
       strings: [
         "Full Stack Developer",
-        "Blockchain Developer",
-        "Machine Learning Developer",
-        "Web Developer",
+        "Physicist",
+        "Mathematician",
+        "Developer",
       ],
       typeSpeed: 100,
       loop: true,

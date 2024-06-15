@@ -19,9 +19,6 @@ export default function Hero() {
       const randomLeftValue = (Math.random() * (90 - 10) + 10).toFixed(2);
       const randomTopValue = (Math.random() * (90 - 10) + 10).toFixed(2);
 
-      console.log(`RANDOM LEFT VALUE: ${randomLeftValue}`);
-      console.log(`RANDOM TOP VALUE: ${randomTopValue}`);
-
       return {
         id: index,
 
