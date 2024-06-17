@@ -1,6 +1,7 @@
 .section {
   padding-block: var(--section-vertical-spacing);
   position: relative;
+  overflow: hidden;
 }
 
 .section:not(.hero)::before {
