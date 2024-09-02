@@ -13,7 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-// import "../assets/css/globals.css";
 import "../assets/css/components/header.modules.css";
 
 //////////////////////////////////////////////////////

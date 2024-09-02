@@ -35,22 +35,16 @@ export default function Articles() {
     const fetchArticles = async () => {
       try {
         const response = await fetch(
-          // PRODUCTION API
-          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
-
-          // DEVELOPMENT API
-          // "http://127.0.0.1:8000/api/v1/get/articles/"
+          `${process.env.local}/api/v1/get/articles/`
         );
         const result = await response.json();
         setArticles(result.articles);
-        // console.log("Fetched articles:", result.articles);
       } catch (error) {
         console.error("Error fetching articles: ", error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchArticles();
   }, []);
 

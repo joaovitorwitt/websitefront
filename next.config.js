@@ -16,6 +16,10 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    production: "https://portfolio-backend-fdxe.onrender.com",
+    local: "http://127.0.0.1:8000",
+  },
 };
 
 module.exports = nextConfig;
