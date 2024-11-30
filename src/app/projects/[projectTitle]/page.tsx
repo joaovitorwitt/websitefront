@@ -11,6 +11,7 @@ import "../../assets/css/pages/project/project.modules.css";
 import RoundButton from "@/app/components/RoundButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { Url } from "url";
 
 //////////////////////////////////////////////////////
 // Project Interface Implementation
@@ -83,7 +84,7 @@ export default function Project({ params }: Props) {
                     {project?.Description}
                   </p>
                   <Link
-                    href={project?.Content}
+                    href={project?.Content!}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
