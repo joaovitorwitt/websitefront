@@ -4,10 +4,8 @@
 "use client";
 import Header from "@/app/components/Header";
 import LoadingComponent from "@/app/components/LoadingComponent";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { formatArticleDate, formatTitleForURL } from "@/app/utils";
 import MathFormula from "@/app/components/MathJax";
 import Head from "next/head";
 import "../../assets/css/pages/article/article.modules.css";
@@ -18,11 +16,11 @@ import RoundButton from "@/app/components/RoundButton";
 //////////////////////////////////////////////////////
 interface Article {
   id: number;
-  title: string;
-  description: string;
-  content: string;
-  publish_date: string;
-  thumbnail: string;
+  Title: string;
+  Description: string;
+  Content: string;
+  date: string;
+  image_url: string;
 }
 
 type Props = {
@@ -43,13 +41,14 @@ export default function Article({ params }: Props) {
       try {
         const response = await fetch(
           // PRODUCTION API
-          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+          // "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
 
           // DEVELOPMENT API
-          // "http://127.0.0.1:8000/api/v1/get/articles/"
+          "http://127.0.0.1:5000/get/articles"
         );
         const result = await response.json();
-        const correctArticleTitle = getCorrectTitle(result.articles);
+        console.log(result);
+        const correctArticleTitle = getCorrectTitle(result);
         setArticle(correctArticleTitle);
       } catch (error) {
         console.log("Error fetching articles,", error);
@@ -63,7 +62,7 @@ export default function Article({ params }: Props) {
 
   function getCorrectTitle(list: any) {
     const correct = list.find(
-      (article: any) => formatTitleForURL(article.title) === params.articleTitle
+      (article: any) => article.url_title === params.articleTitle
     );
     console.log(correct?.title);
     return correct;
@@ -98,15 +97,15 @@ export default function Article({ params }: Props) {
             <div className="blog-post-container container">
               <div className="blog-post-data">
                 <h3 className="blog-post-title title">
-                  {article?.title ?? "Article Not Found"}
+                  {article?.Title ?? "Article Not Found"}
                 </h3>
 
                 <div className="article-data">
-                  <span>{formatArticleDate(article?.publish_date)}</span>
+                  <span>{article?.date}</span>
                 </div>
 
                 <Image
-                  src={article?.thumbnail ?? "/default.jpg"}
+                  src={article?.image_url ?? "/default.jpg"}
                   width={1920}
                   height={1080}
                   alt="article"
@@ -115,8 +114,8 @@ export default function Article({ params }: Props) {
               </div>
 
               <div className="container">
-                {article?.content && (
-                  <p dangerouslySetInnerHTML={{ __html: article?.content }} />
+                {article?.Content && (
+                  <p dangerouslySetInnerHTML={{ __html: article?.Content }} />
                 )}
               </div>
             </div>

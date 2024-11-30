@@ -6,22 +6,23 @@ import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { formatTitleForURL } from "@/app/utils";
 import LoadingComponent from "@/app/components/LoadingComponent";
 import "../../assets/css/pages/project/project.modules.css";
 import RoundButton from "@/app/components/RoundButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { Url } from "url";
 
 //////////////////////////////////////////////////////
 // Project Interface Implementation
 //////////////////////////////////////////////////////
 interface Project {
-  project_id: number;
-  project_title: string;
-  project_description: string;
-  project_image_url: string;
-  project_link: string;
+  id: number;
+  Title: string;
+  Description: string;
+  image_url: string;
+  Content: Url;
+  url_title: string;
 }
 
 type Props = {
@@ -40,15 +41,10 @@ export default function Project({ params }: Props) {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(
-          // PRODUCTION API
-          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/projects/"
-
-          // DEVELOPMENT API
-          // "http://127.0.0.1:8000/api/v1/get/projects/"
-        );
+        const response = await fetch("http://127.0.0.1:5000/get/projects");
         const result = await response.json();
-        const correctTitleProject = getCorrectTitle(result.projects);
+        console.log(result);
+        const correctTitleProject = getCorrectTitle(result);
         setProject(correctTitleProject ?? null);
       } catch (error) {
         console.log("Error fetching projects,", error);
@@ -60,10 +56,7 @@ export default function Project({ params }: Props) {
   }, []);
 
   function getCorrectTitle(list: Project[]) {
-    return list.find(
-      (project) =>
-        formatTitleForURL(project.project_title) === params.projectTitle
-    );
+    return list.find((project) => project.url_title === params.projectTitle);
   }
 
   return (
@@ -77,7 +70,7 @@ export default function Project({ params }: Props) {
             <div className="project-container">
               <div className="project-image-data">
                 <Image
-                  src={project?.project_image_url ?? "/default.png"}
+                  src={project?.image_url ?? "/default.png"}
                   alt="project image"
                   width={1920}
                   height={1080}
@@ -86,14 +79,12 @@ export default function Project({ params }: Props) {
               </div>
               <div className="project-data">
                 <div className="project-data-main">
-                  <h2 className="project-data-title">
-                    {project?.project_title}
-                  </h2>
+                  <h2 className="project-data-title">{project?.Title}</h2>
                   <p className="project-data-description">
-                    {project?.project_description}
+                    {project?.Description}
                   </p>
                   <Link
-                    href={project?.project_link!}
+                    href={project?.Content!}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -8,7 +8,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import "../assets/css/pages/projects/projects.modules.css";
 
-import { formatTitleForURL } from "@/app/utils";
 import Header from "../components/Header";
 import LoadingComponent from "../components/LoadingComponent";
 import RoundButton from "../components/RoundButton";
@@ -17,10 +16,11 @@ import RoundButton from "../components/RoundButton";
 // Project Interface Implementation
 //////////////////////////////////////////////////////
 interface Project {
-  project_id: number;
-  project_title: string;
-  project_description: string;
-  project_image_url: string;
+  id: number;
+  Title: string;
+  Description: string;
+  image_url: string;
+  url_title: string;
 }
 
 //////////////////////////////////////////////////////
@@ -33,16 +33,12 @@ export default function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(
-          // PRODUCTION API
-          "https://portfolio-backend-fdxe.onrender.com/api/v1/get/projects/"
-
-          // DEVELOPMENT API
-          // "http://127.0.0.1:8000/api/v1/get/projects/"
-        );
-
+        const response = await fetch(`http://127.0.0.1:5000/get/projects`);
         const result = await response.json();
-        setProjects(result.projects);
+
+        console.log(result);
+
+        setProjects(result);
       } catch (error) {
         console.log("Error fetching projects, ", error);
       } finally {
@@ -68,16 +64,14 @@ export default function Projects() {
             <div className="portfolio-cards d-grid">
               {projects.map((project) => (
                 <Link
-                  href={`/projects/${formatTitleForURL(project.project_title)}`}
-                  as={`/projects/${formatTitleForURL(project.project_title)}`}
-                  className={
-                    "portfolio-card portfolio-card-" + project.project_id
-                  }
-                  key={project.project_id}
+                  href={`/projects/${project.url_title}`}
+                  as={`/projects/${project.url_title}`}
+                  className={"portfolio-card portfolio-card-" + project.id}
+                  key={project.id}
                 >
                   <div className="card-image">
                     <Image
-                      src={project.project_image_url}
+                      src={project.image_url}
                       alt="card1"
                       width={1920}
                       height={1080}
@@ -85,10 +79,8 @@ export default function Projects() {
                     />
                   </div>
                   <div className="card-heading">
-                    <h5 className="card-title">{project.project_title}</h5>
-                    <span className="card-subtitle">
-                      {project.project_description}
-                    </span>
+                    <h5 className="card-title">{project.Title}</h5>
+                    <span className="card-subtitle">{project.Description}</span>
                   </div>
                 </Link>
               ))}
