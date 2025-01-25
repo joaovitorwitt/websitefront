@@ -47,6 +47,10 @@
   padding: 2rem 1.5rem;
 }
 
+.title-font {
+  font-family: var(--title-font-family);
+}
+
 @media screen and (min-width: 768px) {
   .article-wrapper {
     grid-template-columns: 1fr 2fr;
@@ -58,4 +62,10 @@
     border-bottom-right-radius: 0rem;
     border-top-right-radius: 0rem;
   }
+}
+
+.tags {
+  font-size: small;
+  font-style: italic;
+  opacity: 0.6;
 }

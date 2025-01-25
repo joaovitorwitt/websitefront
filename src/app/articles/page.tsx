@@ -22,6 +22,7 @@ interface Article {
   date: string;
   image_url: string;
   url_title: string;
+  tags: string;
 }
 
 //////////////////////////////////////////////////////
@@ -76,13 +77,14 @@ export default function Articles() {
                   </div>
 
                   <div className="article-data-container">
-                    <div className="article-data">
-                      <span>{article.date}</span>
-                      <span className="article-data-spacer"></span>
-                    </div>
-
                     <h3 className="article-title">{article.Title}</h3>
                     <p className="article-description">{article.Description}</p>
+
+                    <div className="article-data">
+                      <span className="article-data-spacer"></span>
+                      <p className="tags">{article.tags}</p>
+                      <span className="title-font">{article.date}</span>
+                    </div>
                   </div>
                 </div>
               </Link>
