@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Url } from "url";
 
+import projects from "../../assets/projects.json";
+
 //////////////////////////////////////////////////////
 // Project Interface Implementation
 //////////////////////////////////////////////////////
@@ -21,7 +23,7 @@ interface Project {
   Title: string;
   Description: string;
   image_url: string;
-  Content: Url;
+  Content: Url | string;
   url_title: string;
 }
 
@@ -41,10 +43,10 @@ export default function Project({ params }: Props) {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:5000/get/projects");
-        const result = await response.json();
-        console.log(result);
-        const correctTitleProject = getCorrectTitle(result);
+        // const response = await fetch("http://127.0.0.1:5000/get/projects");
+        // const result = await response.json();
+        console.log(projects);
+        const correctTitleProject = getCorrectTitle(projects);
         setProject(correctTitleProject ?? null);
       } catch (error) {
         console.log("Error fetching projects,", error);

@@ -12,6 +12,8 @@ import Header from "../components/Header";
 import LoadingComponent from "../components/LoadingComponent";
 import RoundButton from "../components/RoundButton";
 
+import projects from "../assets/projects.json";
+
 //////////////////////////////////////////////////////
 // Project Interface Implementation
 //////////////////////////////////////////////////////
@@ -27,18 +29,20 @@ interface Project {
 // Projects Component Implementation
 //////////////////////////////////////////////////////
 export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
+  // const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/get/projects`);
-        const result = await response.json();
+        // const response = await fetch(`http://127.0.0.1:5000/get/projects`);
+        // const response = await fetch(projects);
 
-        console.log(result);
+        // const result = await response.json();
 
-        setProjects(result);
+        console.log(projects);
+
+        // setProjects(result);
       } catch (error) {
         console.log("Error fetching projects, ", error);
       } finally {

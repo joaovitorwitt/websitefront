@@ -11,6 +11,8 @@ import "../assets/css/pages/articles/articles.modules.css";
 import "../assets/css/globals.css";
 import RoundButton from "../components/RoundButton";
 
+import articles from "../assets/articles.json";
+
 //////////////////////////////////////////////////////
 // Article Interface Implementation
 //////////////////////////////////////////////////////
@@ -29,17 +31,17 @@ interface Article {
 // Articles Component Implementation
 //////////////////////////////////////////////////////
 export default function Articles() {
-  const [articles, setArticles] = useState<Article[]>([]);
+  // const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         // const response = await fetch(`${process.env.local}/get/articles/`);
-        const response = await fetch(`http://127.0.0.1:5000/get/articles`);
-        const result = await response.json();
-        console.log(result);
-        setArticles(result);
+        // const response = await fetch(`http://127.0.0.1:5000/get/articles`);
+        // const result = await response.json();
+        console.log(articles);
+        // setArticles(articles);
       } catch (error) {
         console.error("Error fetching articles: ", error);
       } finally {

@@ -11,6 +11,8 @@ import Head from "next/head";
 import "../../assets/css/pages/article/article.modules.css";
 import RoundButton from "@/app/components/RoundButton";
 
+import articles from "../../assets/articles.json";
+
 //////////////////////////////////////////////////////
 // Article Interface
 //////////////////////////////////////////////////////
@@ -39,16 +41,16 @@ export default function Article({ params }: Props) {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch(
-          // PRODUCTION API
-          // "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
+        // const response = await fetch(
+        // PRODUCTION API
+        // "https://portfolio-backend-fdxe.onrender.com/api/v1/get/articles/"
 
-          // DEVELOPMENT API
-          "http://127.0.0.1:5000/get/articles"
-        );
-        const result = await response.json();
-        console.log(result);
-        const correctArticleTitle = getCorrectTitle(result);
+        // DEVELOPMENT API
+        // "http://127.0.0.1:5000/get/articles"
+        // );
+        // const result = await response.json();
+        console.log(articles);
+        const correctArticleTitle = getCorrectTitle(articles);
         setArticle(correctArticleTitle);
       } catch (error) {
         console.log("Error fetching articles,", error);
