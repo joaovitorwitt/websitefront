@@ -36,9 +36,7 @@ export const metadata: Metadata = {
   // add openGraph stuff here
 };
 
-//////////////////////////////////////////////////////
-// Root Layout Component
-//////////////////////////////////////////////////////
+
 export default function RootLayout({
   children,
 }: {

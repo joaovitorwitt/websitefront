@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 "use client";
 import Header from "../components/Header";
 import Link from "next/link";
@@ -13,9 +10,7 @@ import RoundButton from "../components/RoundButton";
 
 import articles from "../assets/articles.json";
 
-//////////////////////////////////////////////////////
-// Article Interface Implementation
-//////////////////////////////////////////////////////
+
 interface Article {
   id: number;
   Title: string;
@@ -27,9 +22,7 @@ interface Article {
   tags: string;
 }
 
-//////////////////////////////////////////////////////
-// Articles Component Implementation
-//////////////////////////////////////////////////////
+
 export default function Articles() {
   // const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);

@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 import { useEffect } from "react";
 import Typed from "typed.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,12 +12,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
-// import "../assets/css/globals.css";
 import "../assets/css/components/about.modules.css";
 
-//////////////////////////////////////////////////////
-// About Section Component - section that has the programming languages
-//////////////////////////////////////////////////////
+
 export default function AboutSection() {
   useEffect(() => {
     let typed = new Typed("#changing", {

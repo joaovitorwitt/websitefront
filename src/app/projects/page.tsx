@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 "use client";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,9 +11,7 @@ import RoundButton from "../components/RoundButton";
 
 import projects from "../assets/projects.json";
 
-//////////////////////////////////////////////////////
-// Project Interface Implementation
-//////////////////////////////////////////////////////
+
 interface Project {
   id: number;
   Title: string;
@@ -25,9 +20,7 @@ interface Project {
   url_title: string;
 }
 
-//////////////////////////////////////////////////////
-// Projects Component Implementation
-//////////////////////////////////////////////////////
+
 export default function Projects() {
   // const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);

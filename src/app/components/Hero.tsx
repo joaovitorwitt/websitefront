@@ -50,7 +50,6 @@ export default function Hero() {
     );
   }, []);
 
-  // MOVING IN PIXELS NOT IN ACTUAL PERCENTAGE
 
   return (
     <section className="hero section">

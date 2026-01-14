@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 "use client";
 import Header from "@/app/components/Header";
 import LoadingComponent from "@/app/components/LoadingComponent";
@@ -13,9 +10,7 @@ import RoundButton from "@/app/components/RoundButton";
 
 import articles from "../../assets/articles.json";
 
-//////////////////////////////////////////////////////
-// Article Interface
-//////////////////////////////////////////////////////
+
 interface Article {
   id: number;
   Title: string;
@@ -31,9 +26,7 @@ type Props = {
   };
 };
 
-//////////////////////////////////////////////////////
-// Article Component
-//////////////////////////////////////////////////////
+
 export default function Article({ params }: Props) {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);

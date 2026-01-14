@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 "use client";
 import Header from "@/app/components/Header";
 import { useEffect, useState } from "react";
@@ -15,9 +12,7 @@ import { Url } from "url";
 
 import projects from "../../assets/projects.json";
 
-//////////////////////////////////////////////////////
-// Project Interface Implementation
-//////////////////////////////////////////////////////
+
 interface Project {
   id: number;
   Title: string;
@@ -33,9 +28,7 @@ type Props = {
   };
 };
 
-//////////////////////////////////////////////////////
-// Project Component Implementation
-//////////////////////////////////////////////////////
+
 export default function Project({ params }: Props) {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);

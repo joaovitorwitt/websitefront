@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 "use client";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -15,9 +12,7 @@ import Link from "next/link";
 
 import "../assets/css/components/header.modules.css";
 
-//////////////////////////////////////////////////////
-// Header Component Implementation
-//////////////////////////////////////////////////////
+
 export default function Header() {
   const { theme = "light", setTheme } = useTheme();
 

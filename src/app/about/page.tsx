@@ -1,6 +1,3 @@
-//////////////////////////////////////////////////////
-// Imports
-//////////////////////////////////////////////////////
 "use client";
 import Header from "../components/Header";
 import { RevealWrapper } from "next-reveal";
@@ -20,9 +17,7 @@ import Link from "next/link";
 import "../assets/css/pages/about/about.modules.css";
 import PageGlow from "../components/PageGlow";
 
-//////////////////////////////////////////////////////
-// About Page Component
-//////////////////////////////////////////////////////
+
 export default function About() {
   const { theme = "light", setTheme } = useTheme();
 
