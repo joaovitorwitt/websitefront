@@ -30,6 +30,10 @@ export default function Hero() {
       };
     });
 
+    // Star positions are random, so they must be generated on the client only.
+    // Producing them during render would make the server and client markup
+    // disagree and trigger a hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStars(newStars);
 
     const star = newStars[0];

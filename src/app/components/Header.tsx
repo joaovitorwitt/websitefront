@@ -14,20 +14,23 @@ import "../assets/css/components/header.modules.css";
 
 
 export default function Header() {
-  const { theme = "light", setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
-  async function toggleTheme() {
-    try {
-      let currentTheme =
-        theme === "dark" ? await setTheme("light") : await setTheme("dark");
-      // Handle currentTheme if needed
-    } catch (error) {
-      console.error("Error toggling theme:", error);
-    }
+  // The resolved theme is only known on the client. Render a stable icon until
+  // mounted so the server and first client render agree (no hydration
+  // mismatch), then swap to the real one.
+  const [mounted, setMounted] = useState(false);
+  // Flip to mounted once on the client; this is the standard gate for reading a
+  // client-only value (the resolved theme) without a hydration mismatch.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
+
+  function toggleTheme() {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
 
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
-  const iconTheme = theme === "dark" ? faSun : faMoon;
+  const iconTheme = mounted && resolvedTheme === "dark" ? faSun : faMoon;
 
   const toggleMenu = () => {
     setIsMenuActive((prevState) => !prevState);
@@ -48,7 +51,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="header" id="home" data-theme={theme}>
+    <header className="header" id="home">
       <nav className="navbar container">
         <Link href={"/"} className="logo">
           João.

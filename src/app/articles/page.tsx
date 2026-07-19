@@ -1,84 +1,52 @@
-"use client";
 import Header from "../components/Header";
 import Link from "next/link";
-import LoadingComponent from "../components/LoadingComponent";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import "../assets/css/pages/articles/articles.modules.css";
 import "../assets/css/globals.css";
 import RoundButton from "../components/RoundButton";
+import { getArticles, formatDate } from "../lib/api";
 
-import articles from "../assets/articles.json";
+export const revalidate = 300;
 
-
-interface Article {
-  id: number;
-  Title: string;
-  Description: string;
-  Content: string;
-  date: string;
-  image_url: string;
-  url_title: string;
-  tags: string;
-}
-
-
-export default function Articles() {
-  // const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        // const response = await fetch(`${process.env.local}/get/articles/`);
-        // const response = await fetch(`http://127.0.0.1:5000/get/articles`);
-        // const result = await response.json();
-        console.log(articles);
-        // setArticles(articles);
-      } catch (error) {
-        console.error("Error fetching articles: ", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchArticles();
-  }, []);
+export default async function Articles() {
+  const articles = await getArticles();
 
   return (
     <div className="articles-page-wrapper">
       <Header />
       <div className="container">
-        {loading ? (
-          <LoadingComponent />
-        ) : Array.isArray(articles) && articles.length > 0 ? (
+        {articles.length > 0 ? (
           <div className="posts-wrapper">
             {articles.map((article) => (
               <Link
                 key={article.id}
                 className="article"
-                href={`/articles/${article.url_title}`}
+                href={`/articles/${article.slug}`}
               >
                 <div className="article-wrapper">
                   <div className="posts-article-image-wrapper">
-                    <Image
-                      src={article?.image_url}
-                      key={article.id}
-                      alt="article image"
-                      width={1920}
-                      height={1080}
-                      className="article-image"
-                      loading="lazy"
-                    />
+                    {article.image_url && (
+                      <Image
+                        src={article.image_url}
+                        alt={article.title}
+                        width={1920}
+                        height={1080}
+                        className="article-image"
+                        loading="lazy"
+                      />
+                    )}
                   </div>
 
                   <div className="article-data-container">
-                    <h3 className="article-title">{article.Title}</h3>
-                    <p className="article-description">{article.Description}</p>
+                    <h3 className="article-title">{article.title}</h3>
+                    <p className="article-description">{article.description}</p>
 
                     <div className="article-data">
                       <span className="article-data-spacer"></span>
-                      <p className="tags">{article.tags}</p>
-                      <span className="title-font">{article.date}</span>
+                      <p className="tags">{article.tags.join(", ")}</p>
+                      <span className="title-font">
+                        {formatDate(article.created_at)}
+                      </span>
                     </div>
                   </div>
                 </div>

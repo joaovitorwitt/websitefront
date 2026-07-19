@@ -1,7 +1,6 @@
 "use client";
 import Header from "../components/Header";
-import { RevealWrapper } from "next-reveal";
-import { useTheme } from "next-themes";
+import Reveal from "../components/Reveal";
 import ProfilePicture from "../assets/images/profile-picture.jpg";
 import Image from "next/image";
 import {
@@ -19,11 +18,9 @@ import PageGlow from "../components/PageGlow";
 
 
 export default function About() {
-  const { theme = "light", setTheme } = useTheme();
-
   return (
-    <div data-theme={theme}>
-      <RevealWrapper>
+    <div>
+      <Reveal>
         <Header />
         <PageGlow />
         <div className="container">
@@ -140,7 +137,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </RevealWrapper>
+      </Reveal>
     </div>
   );
 }

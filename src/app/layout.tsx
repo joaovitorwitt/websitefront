@@ -43,12 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <script
-          src="https://polyfill.io/v3/polyfill.min.js?features=es6"
-          async
-        ></script>
         <script
           id="MathJax-script"
           async
