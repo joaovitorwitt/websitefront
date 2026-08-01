@@ -1,7 +1,6 @@
-"use client";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import AboutSection from "./components/AboutSection";
+import ArticlesSection from "./components/ArticlesSection";
 import PortfolioSection from "./components/PortfolioSection";
 import Footer from "./components/Footer";
 
@@ -11,7 +10,7 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      <AboutSection />
+      <ArticlesSection />
       <PortfolioSection />
       <Footer />
     </>

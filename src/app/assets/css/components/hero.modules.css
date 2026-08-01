@@ -4,6 +4,12 @@
   overflow: hidden;
 }
 
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
 .section:not(.hero)::before {
   content: "";
   position: absolute;
@@ -34,13 +40,6 @@
 }
 
 /************************************/
-
-:root {
-  --translate-x: 0%;
-  --translate-y: 0%;
-}
-
-/************************************/
 /* STARS FEATURE */
 /************************************/
 .stars-overflow {
@@ -48,67 +47,57 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%;
-  overflow: hidden;
-  height: 1200px;
-  animation-duration: 70s;
+  width: 0;
+  height: 0;
+}
+
+/* Each star gets its own zero-size, centered pivot that only rotates. The
+   dot inside is offset outward by its own radius, so rotating the pivot
+   sweeps it around a circle centered on the black hole. Randomized duration,
+   a negative delay (starting angle), and direction (per star, in Hero.tsx)
+   are what make the field read as scattered orbits instead of one rigid
+   rotating disk. */
+.star-orbit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  animation-name: orbit;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-delay: 0s;
-  animation-direction: normal;
-  animation-fill-mode: none;
-  animation-play-state: running;
-  animation-name: startsOrbit;
-  transform: translate(-50%, -50%);
-  animation-timeline: auto;
-  animation-range-start: normal;
 }
 
-.star-animation {
+.star-dot {
   position: absolute;
+  top: -2px;
+  left: -2px;
   width: 4px;
   height: 4px;
-  top: 50%;
   border-radius: 5px;
   background-color: var(--default-text-color);
-  animation-name: blackHoleAttraction;
-  animation-delay: 0s;
+  animation-name: twinkle;
   animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-@keyframes starsInit {
-  0% {
-    transform: scale(0);
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
   }
 
-  100% {
-    transform: scale(1);
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* this animation makes the starts go to the center of the black hole */
-@keyframes blackHoleAttraction {
+@keyframes twinkle {
   0% {
     opacity: 1;
-    transform: translateZ(0) translate(0) scale(1);
   }
 
   100% {
-    opacity: 0;
-    transform: translateZ(0) translate(var(--translate-x), var(--translate-y))
-      scale(0.7);
-    top: var(--translate-y);
-    left: var(--translate-x);
-  }
-}
-
-@keyframes startsOrbit {
-  0% {
-    transform: translateZ(0) translate(-50%, -50%) rotate(0);
-  }
-
-  100% {
-    transform: translateZ(0) translate(-50%, -50%) rotate(-2500deg);
+    opacity: 0.15;
   }
 }
 

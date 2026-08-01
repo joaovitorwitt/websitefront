@@ -22,10 +22,10 @@ export default async function Projects() {
 
         <div className="loading-container-wrapper">
           <div className="portfolio-cards d-grid">
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <Link
                 href={`/projects/${project.slug}`}
-                className={"portfolio-card portfolio-card-" + project.id}
+                className={"portfolio-card portfolio-card-" + ((index % 6) + 1)}
                 key={project.id}
               >
                 <div className="card-image">
