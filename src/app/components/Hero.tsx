@@ -69,9 +69,139 @@ function createStars(): Star[] {
   );
 }
 
+// A small, self-contained particle system (separate from the DOM star
+// field above) that orbits close to the black hole and stretches into a
+// tangential streak as it nears the "photon sphere" — a decorative
+// approximation of gravitational lensing. Internal coordinates are in a
+// fixed canvas pixel space (see LENS_CANVAS_SIZE); LENS_INNER_RADIUS sits
+// just outside where .shadow's edge renders (the canvas's CSS display
+// size is kept proportional to .shadow's 20vw so this alignment holds at
+// any viewport width).
+interface LensParticle {
+  angle: number;
+  radius: number;
+  angularSpeed: number;
+  decayPerSecond: number;
+  size: number;
+}
+
+const LENS_CANVAS_SIZE = 600;
+const LENS_OUTER_RADIUS = 280;
+const LENS_INNER_RADIUS = 185;
+const LENS_PARTICLE_COUNT = 40;
+// Proximity (0 at the outer edge, 1 at the photon sphere) thresholds for
+// fading a particle in right after it spawns and out right before it's
+// consumed, so both ends are a dissolve rather than a pop in/out.
+const LENS_FADE_IN_END = 0.08;
+const LENS_FADE_OUT_START = 0.8;
+// How much faster a particle spins as it nears the photon sphere — a
+// crude but convincing stand-in for real orbital speed-up at smaller
+// radii (angular momentum conservation).
+const LENS_SPIN_BOOST = 6;
+
+function createLensParticle(): LensParticle {
+  return {
+    angle: randomBetween(0, Math.PI * 2),
+    radius: randomBetween(LENS_INNER_RADIUS, LENS_OUTER_RADIUS),
+    angularSpeed: (Math.random() < 0.5 ? -1 : 1) * randomBetween(0.15, 0.4),
+    decayPerSecond: randomBetween(6, 14),
+    size: randomBetween(1.5, 3),
+  };
+}
+
+// Canvas strokeStyle can't take a raw `var(--x)` reference, so the current
+// theme color has to be resolved to a real value each time it's read. Kept
+// to a single shared color (no per-particle hue variety, unlike the DOM
+// star field) since the tint colors read poorly against the light theme's
+// background — matching the site's minimalist black/white identity here.
+function getLensParticleColor(): string {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue("--default-text-color")
+    .trim();
+  return value || "#ffffff";
+}
+
+function lensProximity(radius: number): number {
+  return Math.min(
+    Math.max((LENS_OUTER_RADIUS - radius) / (LENS_OUTER_RADIUS - LENS_INNER_RADIUS), 0),
+    1
+  );
+}
+
+function updateLensParticles(particles: LensParticle[], dtSeconds: number) {
+  for (const particle of particles) {
+    const proximity = lensProximity(particle.radius);
+    // Spin faster the closer it gets — negligible far out, dramatic right
+    // at the photon sphere (proximity squared, same "late and sudden"
+    // curve as the tangential stretch below).
+    const spinMultiplier = 1 + proximity * proximity * LENS_SPIN_BOOST;
+    particle.angle += particle.angularSpeed * spinMultiplier * dtSeconds;
+    particle.radius -= particle.decayPerSecond * dtSeconds;
+
+    if (particle.radius <= LENS_INNER_RADIUS) {
+      // "Consumed" by the black hole — respawn at the outer edge with
+      // fresh randomized motion. By this point the draw-side fade-out
+      // (below) has already taken it to alpha 0, so the jump back out
+      // happens while invisible rather than as a visible pop.
+      particle.radius = LENS_OUTER_RADIUS;
+      particle.angle = randomBetween(0, Math.PI * 2);
+      particle.angularSpeed = (Math.random() < 0.5 ? -1 : 1) * randomBetween(0.15, 0.4);
+      particle.decayPerSecond = randomBetween(6, 14);
+    }
+  }
+}
+
+function drawLensParticles(
+  ctx: CanvasRenderingContext2D,
+  particles: LensParticle[],
+  color: string
+) {
+  ctx.clearRect(0, 0, LENS_CANVAS_SIZE, LENS_CANVAS_SIZE);
+  ctx.strokeStyle = color;
+  const center = LENS_CANVAS_SIZE / 2;
+
+  for (const particle of particles) {
+    const x = center + Math.cos(particle.angle) * particle.radius;
+    const y = center + Math.sin(particle.angle) * particle.radius;
+
+    const proximity = lensProximity(particle.radius);
+    // Grows sharply (proximity squared) only near the photon sphere, so
+    // far-out particles read as plain dots and the stretch into a
+    // streak is a late, dramatic effect rather than a gradual one.
+    const halfStretch = (particle.size + proximity * proximity * 26) / 2;
+
+    // Tangential to the radius (i.e. along the direction of travel), which
+    // is what makes it read as motion-smear rather than a random line.
+    const tangentAngle = particle.angle + Math.PI / 2;
+    const dx = Math.cos(tangentAngle) * halfStretch;
+    const dy = Math.sin(tangentAngle) * halfStretch;
+
+    // Fades in right after spawning and out right before reaching the
+    // photon sphere, so both ends read as dissolving into the black hole
+    // rather than an abrupt pop in/out.
+    let alpha = 1;
+    if (proximity < LENS_FADE_IN_END) {
+      alpha = proximity / LENS_FADE_IN_END;
+    } else if (proximity > LENS_FADE_OUT_START) {
+      alpha = 1 - (proximity - LENS_FADE_OUT_START) / (1 - LENS_FADE_OUT_START);
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(x - dx, y - dy);
+    ctx.lineTo(x + dx, y + dy);
+    ctx.lineCap = "round";
+    ctx.lineWidth = particle.size;
+    ctx.globalAlpha = alpha;
+    ctx.stroke();
+  }
+
+  ctx.globalAlpha = 1;
+}
+
 export default function Hero() {
   const [stars, setStars] = useState<Star[]>([]);
   const heroRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     // Star orbits are random, so they must be generated on the client only.
@@ -79,6 +209,48 @@ export default function Hero() {
     // disagree and trigger a hydration mismatch.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setStars(createStars());
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = LENS_CANVAS_SIZE * dpr;
+    canvas.height = LENS_CANVAS_SIZE * dpr;
+    ctx.scale(dpr, dpr);
+
+    const particles = Array.from({ length: LENS_PARTICLE_COUNT }, createLensParticle);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Draw one static frame instead of animating — consistent with how
+      // the rest of the scene pauses in a varied state rather than
+      // disappearing under this preference.
+      drawLensParticles(ctx, particles, getLensParticleColor());
+      return;
+    }
+
+    let rafId: number;
+    let lastTime: number | null = null;
+
+    function frame(time: number) {
+      if (lastTime === null) lastTime = time;
+      const dtSeconds = (time - lastTime) / 1000;
+      lastTime = time;
+
+      updateLensParticles(particles, dtSeconds);
+      // Re-resolved every frame (cheap) so a live theme toggle is
+      // reflected immediately rather than only on the next mount.
+      drawLensParticles(ctx!, particles, getLensParticleColor());
+
+      rafId = requestAnimationFrame(frame);
+    }
+
+    rafId = requestAnimationFrame(frame);
+
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   useEffect(() => {
@@ -177,6 +349,8 @@ export default function Hero() {
   return (
     <section className="hero section" ref={heroRef}>
       <div className="container">
+        <canvas className="lensing-canvas" ref={canvasRef}></canvas>
+
         <div className="black-hole-scroll">
           <div className="black-hole-wrapper">
             <div className="doppler-beaming"></div>
@@ -198,6 +372,7 @@ export default function Hero() {
           <div className="shooting-star shooting-star-1"></div>
           <div className="shooting-star shooting-star-2"></div>
           <div className="shooting-star shooting-star-3"></div>
+          <div className="shooting-star shooting-star-4"></div>
         </div>
       </div>
     </section>

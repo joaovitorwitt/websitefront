@@ -40,6 +40,31 @@
 }
 
 /************************************/
+/* GRAVITATIONAL LENSING */
+/************************************/
+/* A decorative particle stream (Hero.tsx canvas drawing, not the DOM star
+   field below) orbiting close to the black hole and stretching into a
+   streak near the photon sphere. Sized proportionally to .shadow's 20vw
+   so the canvas's internal "photon sphere" radius keeps lining up with
+   the shadow's actual rendered edge at any viewport width. z-index:-1
+   (a *negative* value, not positive) is deliberate: .black-hole-scroll
+   establishes its own stacking context (it has a non-none `transform`),
+   so it paints as a single unit at the "auto/0" level — a negative
+   z-index here is what keeps this layer behind that whole unit (so
+   .shadow correctly occludes it) while still staying in front of the
+   z-index:-2 star field. */
+.lensing-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34vw;
+  height: 34vw;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/************************************/
 /* STARS FEATURE */
 /************************************/
 .stars-overflow {
@@ -161,15 +186,21 @@
    instance below; the keyframe only adds translateX along that already-
    rotated axis, same "rotate once, translate along the local axis" trick
    the orbiting stars use. Most of each animation cycle is spent invisible
-   and parked, so streaks appear occasionally rather than looping visibly. */
+   and parked, so streaks appear occasionally rather than looping visibly.
+   Color comes from --default-text-color (not a hardcoded white) so these
+   stay visible in light theme too — a plain white streak would have been
+   nearly invisible against that theme's light background, which was
+   likely a real contributor to "hard to notice." The glow (box-shadow) is
+   what makes the head read as a bright point rather than a plain dot. */
 .shooting-star {
   position: absolute;
   top: 0;
   left: 0;
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--default-text-color);
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--default-text-color) 80%, transparent);
   opacity: 0;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -180,87 +211,142 @@
   position: absolute;
   top: 50%;
   right: 50%;
-  width: 70px;
+  width: 130px;
   height: 1px;
   transform: translateY(-50%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7));
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--default-text-color) 90%, transparent)
+  );
 }
 
 .shooting-star-1 {
   top: 18%;
   left: 8%;
   animation-name: shooting-star-1;
-  animation-duration: 26s;
-  animation-delay: -6s;
+  animation-duration: 13s;
+  animation-delay: -3s;
 }
 
 .shooting-star-2 {
   top: 65%;
   left: 72%;
   animation-name: shooting-star-2;
-  animation-duration: 34s;
-  animation-delay: -18s;
+  animation-duration: 17s;
+  animation-delay: -9s;
 }
 
 .shooting-star-3 {
   top: 40%;
   left: 85%;
   animation-name: shooting-star-3;
-  animation-duration: 29s;
-  animation-delay: -4s;
+  animation-duration: 15s;
+  animation-delay: -2s;
 }
 
+.shooting-star-4 {
+  top: 75%;
+  left: 20%;
+  animation-name: shooting-star-4;
+  animation-duration: 20s;
+  animation-delay: -12s;
+}
+
+/* Shape shared by all four (only the rotate angle and travel distance
+   differ): appear instantly, hold at full brightness while traveling,
+   then fade out over the last stretch of the trip — a distinct "hold"
+   before the fade is what makes each pass read as a real streak instead
+   of an instant blink. */
 @keyframes shooting-star-1 {
   0%,
-  90% {
+  80% {
     opacity: 0;
     transform: rotate(25deg) translateX(0);
   }
 
-  91% {
+  81% {
     opacity: 1;
   }
 
-  97%,
+  88% {
+    opacity: 1;
+    transform: rotate(25deg) translateX(144px);
+  }
+
+  94%,
   100% {
     opacity: 0;
-    transform: rotate(25deg) translateX(220px);
+    transform: rotate(25deg) translateX(240px);
   }
 }
 
 @keyframes shooting-star-2 {
   0%,
-  92% {
+  80% {
     opacity: 0;
     transform: rotate(-155deg) translateX(0);
   }
 
-  93% {
+  81% {
     opacity: 1;
   }
 
-  98%,
+  88% {
+    opacity: 1;
+    transform: rotate(-155deg) translateX(120px);
+  }
+
+  94%,
   100% {
     opacity: 0;
-    transform: rotate(-155deg) translateX(180px);
+    transform: rotate(-155deg) translateX(200px);
   }
 }
 
 @keyframes shooting-star-3 {
   0%,
-  88% {
+  80% {
     opacity: 0;
     transform: rotate(160deg) translateX(0);
   }
 
-  89% {
+  81% {
     opacity: 1;
   }
 
-  95%,
+  88% {
+    opacity: 1;
+    transform: rotate(160deg) translateX(132px);
+  }
+
+  94%,
   100% {
     opacity: 0;
-    transform: rotate(160deg) translateX(200px);
+    transform: rotate(160deg) translateX(220px);
+  }
+}
+
+@keyframes shooting-star-4 {
+  0%,
+  80% {
+    opacity: 0;
+    transform: rotate(50deg) translateX(0);
+  }
+
+  81% {
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 1;
+    transform: rotate(50deg) translateX(126px);
+  }
+
+  94%,
+  100% {
+    opacity: 0;
+    transform: rotate(50deg) translateX(210px);
   }
 }
 
