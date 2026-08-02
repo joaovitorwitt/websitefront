@@ -5,7 +5,14 @@ import type { Metadata } from "next";
 import "../../assets/css/pages/article/article.modules.css";
 import RoundButton from "@/app/components/RoundButton";
 import ArticleContent from "@/app/components/ArticleContent";
-import { getArticles, getContentItem, formatDate } from "@/app/lib/api";
+import RelatedArticles from "@/app/components/RelatedArticles";
+import {
+  getArticles,
+  getContentItem,
+  formatDate,
+  estimateReadingTime,
+} from "@/app/lib/api";
+import ProfilePicture from "@/app/assets/images/profile-picture.jpg";
 
 export const revalidate = 300;
 
@@ -24,9 +31,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!article) return { title: "Article Not Found | João Vitor Witt" };
 
+  const title = `${article.title} | João Vitor Witt`;
+
   return {
-    title: `${article.title} | João Vitor Witt`,
+    title,
     description: article.description,
+    openGraph: {
+      type: "article",
+      url: `/articles/${article.slug}`,
+      siteName: "João Vitor Witt",
+      locale: "en_US",
+      title,
+      description: article.description,
+      publishedTime: article.created_at,
+      tags: article.tags,
+      images: article.image_url
+        ? [{ url: article.image_url }]
+        : [
+            {
+              url: ProfilePicture.src,
+              width: ProfilePicture.width,
+              height: ProfilePicture.height,
+              alt: title,
+            },
+          ],
+    },
   };
 }
 
@@ -45,7 +74,11 @@ export default async function Article({ params }: Props) {
             <h3 className="blog-post-title title">{article.title}</h3>
 
             <div className="article-data">
-              <span>{formatDate(article.created_at)}</span>
+              <span>
+                {formatDate(article.created_at)}
+                {article.content &&
+                  ` · ${estimateReadingTime(article.content)} min read`}
+              </span>
             </div>
 
             {article.image_url && (
@@ -64,6 +97,8 @@ export default async function Article({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <RelatedArticles currentSlug={article.slug} tags={article.tags} />
 
       <div className="large-button-container" style={{ padding: "3rem 0" }}>
         <RoundButton url={"/articles"} buttonText={"Return"} />

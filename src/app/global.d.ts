@@ -3,8 +3,12 @@ export {};
 
 declare global {
   interface Window {
-    MathJax: {
-      typeset: () => void;
+    MathJax?: {
+      typesetPromise?: () => Promise<void>;
+      startup?: {
+        promise?: Promise<void>;
+        typeset?: boolean;
+      };
     };
   }
 }

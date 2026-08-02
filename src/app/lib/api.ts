@@ -91,3 +91,14 @@ export function formatDate(createdAt: string): string {
     timeZone: "UTC",
   });
 }
+
+const WORDS_PER_MINUTE = 200;
+
+// Derived purely from the already-fetched article content, so this needs no
+// backend field: strip HTML tags down to plain text, count words, and round
+// up to the nearest minute (never 0, even for a very short article).
+export function estimateReadingTime(content: string): number {
+  const text = content.replace(/<[^>]*>/g, " ");
+  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(wordCount / WORDS_PER_MINUTE));
+}
