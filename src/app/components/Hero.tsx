@@ -367,13 +367,6 @@ export default function Hero() {
             their size/speed/brightness already establish. */}
         <div className="stars-overflow -near">{nearStars.map(renderStar)}</div>
         <div className="stars-overflow -far">{farStars.map(renderStar)}</div>
-
-        <div className="shooting-stars">
-          <div className="shooting-star shooting-star-1"></div>
-          <div className="shooting-star shooting-star-2"></div>
-          <div className="shooting-star shooting-star-3"></div>
-          <div className="shooting-star shooting-star-4"></div>
-        </div>
       </div>
     </section>
   );

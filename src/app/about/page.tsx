@@ -40,9 +40,7 @@ export default function About() {
 
               <p className="about-me-description">
                 I&apos;m enthusiastic about exploring the fields of mathematics,
-                physics, and computer science. Here, you will find content about
-                these topics. My goal is to help humanity advance as an
-                intelligent species.
+                physics, and computer science.{" "}
                 <Link href={"/articles"} className="article-redirection">
                   <strong>Check out my articles</strong>
                 </Link>

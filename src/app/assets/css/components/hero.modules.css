@@ -171,185 +171,6 @@
   }
 }
 
-/************************************/
-/* SHOOTING STARS */
-/************************************/
-.shooting-stars {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Each streak is a dot with a fading tail (::before) pointing opposite the
-   travel direction. The travel angle is a static rotate() baked in per
-   instance below; the keyframe only adds translateX along that already-
-   rotated axis, same "rotate once, translate along the local axis" trick
-   the orbiting stars use. Most of each animation cycle is spent invisible
-   and parked, so streaks appear occasionally rather than looping visibly.
-   Color comes from --default-text-color (not a hardcoded white) so these
-   stay visible in light theme too — a plain white streak would have been
-   nearly invisible against that theme's light background, which was
-   likely a real contributor to "hard to notice." The glow (box-shadow) is
-   what makes the head read as a bright point rather than a plain dot. */
-.shooting-star {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background-color: var(--default-text-color);
-  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--default-text-color) 80%, transparent);
-  opacity: 0;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.shooting-star::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  width: 130px;
-  height: 1px;
-  transform: translateY(-50%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--default-text-color) 90%, transparent)
-  );
-}
-
-.shooting-star-1 {
-  top: 18%;
-  left: 8%;
-  animation-name: shooting-star-1;
-  animation-duration: 13s;
-  animation-delay: -3s;
-}
-
-.shooting-star-2 {
-  top: 65%;
-  left: 72%;
-  animation-name: shooting-star-2;
-  animation-duration: 17s;
-  animation-delay: -9s;
-}
-
-.shooting-star-3 {
-  top: 40%;
-  left: 85%;
-  animation-name: shooting-star-3;
-  animation-duration: 15s;
-  animation-delay: -2s;
-}
-
-.shooting-star-4 {
-  top: 75%;
-  left: 20%;
-  animation-name: shooting-star-4;
-  animation-duration: 20s;
-  animation-delay: -12s;
-}
-
-/* Shape shared by all four (only the rotate angle and travel distance
-   differ): appear instantly, hold at full brightness while traveling,
-   then fade out over the last stretch of the trip — a distinct "hold"
-   before the fade is what makes each pass read as a real streak instead
-   of an instant blink. */
-@keyframes shooting-star-1 {
-  0%,
-  80% {
-    opacity: 0;
-    transform: rotate(25deg) translateX(0);
-  }
-
-  81% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 1;
-    transform: rotate(25deg) translateX(144px);
-  }
-
-  94%,
-  100% {
-    opacity: 0;
-    transform: rotate(25deg) translateX(240px);
-  }
-}
-
-@keyframes shooting-star-2 {
-  0%,
-  80% {
-    opacity: 0;
-    transform: rotate(-155deg) translateX(0);
-  }
-
-  81% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 1;
-    transform: rotate(-155deg) translateX(120px);
-  }
-
-  94%,
-  100% {
-    opacity: 0;
-    transform: rotate(-155deg) translateX(200px);
-  }
-}
-
-@keyframes shooting-star-3 {
-  0%,
-  80% {
-    opacity: 0;
-    transform: rotate(160deg) translateX(0);
-  }
-
-  81% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 1;
-    transform: rotate(160deg) translateX(132px);
-  }
-
-  94%,
-  100% {
-    opacity: 0;
-    transform: rotate(160deg) translateX(220px);
-  }
-}
-
-@keyframes shooting-star-4 {
-  0%,
-  80% {
-    opacity: 0;
-    transform: rotate(50deg) translateX(0);
-  }
-
-  81% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 1;
-    transform: rotate(50deg) translateX(126px);
-  }
-
-  94%,
-  100% {
-    opacity: 0;
-    transform: rotate(50deg) translateX(210px);
-  }
-}
-
 /* BLACK HOLE STUFF */
 
 /* Scroll-linked shrink/fade lives on this wrapper, not .black-hole-wrapper
@@ -449,20 +270,15 @@
    version. Orbiting/twinkling stars just pause wherever their randomized
    phase happens to land (still a scattered, varied-looking field, just
    still), which is why those use animation-play-state instead of
-   animation:none. Shooting stars pause mid-cycle would risk freezing on a
-   visible streak, so those are hidden outright instead. The intro
-   animation is a one-shot, not a loop, but its scale swing is still a
-   real "zoom," so it's skipped in favor of appearing immediately at rest. */
+   animation:none. The intro animation is a one-shot, not a loop, but its
+   scale swing is still a real "zoom," so it's skipped in favor of
+   appearing immediately at rest. (Shooting stars have their own
+   reduced-motion handling in shooting-stars.modules.css.) */
 @media (prefers-reduced-motion: reduce) {
   .star-orbit,
   .star-dot,
   .shadow {
     animation-play-state: paused;
-  }
-
-  .shooting-star {
-    animation: none;
-    opacity: 0;
   }
 
   .black-hole-wrapper {
