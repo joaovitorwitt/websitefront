@@ -6,6 +6,8 @@ import "../../assets/css/pages/article/article.modules.css";
 import RoundButton from "@/app/components/RoundButton";
 import ArticleContent from "@/app/components/ArticleContent";
 import RelatedArticles from "@/app/components/RelatedArticles";
+import ReadingProgress from "@/app/components/ReadingProgress";
+import ShareButtons from "@/app/components/ShareButtons";
 import {
   getArticles,
   getContentItem,
@@ -15,6 +17,8 @@ import {
 import ProfilePicture from "@/app/assets/images/profile-picture.jpg";
 
 export const revalidate = 300;
+
+const BASE_URL = "https://www.joaovitorwitt.com";
 
 type Props = {
   params: Promise<{ articleTitle: string }>;
@@ -67,6 +71,7 @@ export default async function Article({ params }: Props) {
 
   return (
     <div className="article-page-wrapper">
+      <ReadingProgress />
       <Header />
       <section className="blog-post section-header-offset">
         <div className="blog-post-container container">
@@ -95,6 +100,11 @@ export default async function Article({ params }: Props) {
           <div className="container">
             {article.content && <ArticleContent html={article.content} />}
           </div>
+
+          <ShareButtons
+            title={article.title}
+            url={`${BASE_URL}/articles/${article.slug}`}
+          />
         </div>
       </section>
 
